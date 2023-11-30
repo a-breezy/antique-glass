@@ -81,9 +81,9 @@ router.put('/:id', async (req, res) => {
             })
         }
 
-        const {id} = req.params.id;
+        const id = req.params.id;
         const result = await Glass.findByIdAndUpdate(id, req.body);
-
+        console.log(id, result)
         if (!result) {
             return res.status(404).json({message: "Glass not found"})
         }
