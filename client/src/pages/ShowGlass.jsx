@@ -52,7 +52,7 @@ export default function ShowGlass() {
           </div>
           <div className='my-4'>
             <span className='text-x1 mr-4 text-gray-500'>Availability</span>
-            <span>{glass.availability}</span>
+            <span>{glass.availability.toString()}</span>
           </div>
           <div className='my-4'>
             <span className='text-x1 mr-4 text-gray-500'>Created At</span>
