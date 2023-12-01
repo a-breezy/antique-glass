@@ -3,7 +3,7 @@ import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import {useSnackbar} from 'notistack'
 
 export default function CreateGlass() {
   const [title, setTitle] = useState('');
@@ -12,6 +12,7 @@ export default function CreateGlass() {
   const [availability, setAvailability] = useState(true);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const {enqueueSnackbar} = useSnackbar()
 
   const handleSaveGlass = () => {
     const data = {
@@ -26,11 +27,12 @@ export default function CreateGlass() {
       .post('http://localhost:5555/glass', data)
       .then(() => {
         setLoading(false);
+        enqueueSnackbar('Glass created successfully!', {variant: 'success'})
         navigate('/')
       })
       .catch((error) => {
         setLoading(false);
-        alert('An error happened. Please check console')
+        enqueueSnackbar('An error happened. Please check console', {variant: 'error'})
         console.log(error)
       })
   }

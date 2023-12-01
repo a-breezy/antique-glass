@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
-import {BiShow} from 'react-icons/bi'
+import { BiShow } from "react-icons/bi";
 import {
   MdOutlineDelete,
   MdOutlineProductionQuantityLimits,
@@ -39,8 +39,8 @@ export const GlassSingleCard = ({ glass }) => {
 
       <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
         <BiShow
-            className='text-3x1 text-blue-800 hover:text-black cursor-pointer'
-            onClick={() => setShowModal(true)}
+          className="text-3x1 text-blue-800 hover:text-black cursor-pointer"
+          onClick={() => setShowModal(true)}
         />
         <Link to={`/glass/details/${glass._id}`}>
           <BsInfoCircle className="text-2x1 text-green-800" />
@@ -52,11 +52,9 @@ export const GlassSingleCard = ({ glass }) => {
           <MdOutlineDelete className="text-2x1 text-red-600" />
         </Link>
       </div>
-      {
-        showModal && (
-            <GlassModal glass={glass} onClose={() => setShowModal(false)} />
-        )
-      }
+      {showModal && (
+        <GlassModal glass={glass} onClose={() => setShowModal(false)} />
+      )}
     </div>
   );
 };

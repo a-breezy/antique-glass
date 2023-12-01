@@ -37,8 +37,8 @@ export default function GlassModal({ glass, onClose }) {
         <p className="mt-4">Depict some information about the glass here</p>
         <p className="my-2">
           Give more broad information about the glass and whatever else you can
-          think about it to give the user more information about what they&aposre
-          buying here
+          think about it to give the user more information about what
+          they&aposre buying here
         </p>
       </div>
     </div>
