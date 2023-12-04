@@ -1,27 +1,43 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const glassSchema = mongoose.Schema(
-    {
-        title: {
-            type:String,
-            required: true,
-        },
-        quantity: {
-            type: Number,
-            required: true,
-        },
-        price: {
-            type: Number,
-            required: true,
-        },
-        availability: {
-            type: Boolean,
-            required: true
-        },
+  {
+    title: {
+      type: String,
+      required: true,
     },
-    {
-        timestamps: true
-    }
-)
+    descrption: {
+      type: String,
+      required: true,
+    },
+    condition: {
+      type: String,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    // set price minimum price that item can sell for
+    offerPrice: {
+      type: Number,
+      required: true,
+    },
+    availability: {
+      type: Boolean,
+      required: true,
+    },
+    images: {
+      type: Array,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-export const Glass = mongoose.model('Glass', glassSchema)
+export const Glass = mongoose.model("Glass", glassSchema);
