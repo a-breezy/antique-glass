@@ -7,7 +7,7 @@ export default function BackButton ({destination = '/'}) {
     <div className='flex'>
         <Link
             to={destination}
-            className='bg-sky-800 text-white px-4 py-1 rounded-lg w-fit'
+            className='bg-sky-800 text-white px-4 py-1 rounded-lg flex justify-center  w-1/6 lg:w-52'
         >
             <BsArrowLeft className='text-22x1' />
         </Link>

@@ -8,12 +8,12 @@ import { useSnackbar } from "notistack";
 export default function CreateGlass() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [condition, setCondition] = useState("Good");
+  const [condition, setCondition] = useState("good");
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
   const [offer, setOffer] = useState(0);
   const [availability, setAvailability] = useState(true);
-  const [image, setImage] = useState([]);
+  // const [image, setImage] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -21,8 +21,11 @@ export default function CreateGlass() {
   const handleSaveGlass = () => {
     const data = {
       title,
+      description,
+      condition,
       quantity,
       price,
+      offer,
       availability,
     };
     // set catch to make sure that title, quantity, price, and availability are met
@@ -46,9 +49,9 @@ export default function CreateGlass() {
   return (
     <div className="p-4">
       <BackButton />
-      <h1 className="text-3x1 my-4">Create Glass</h1>
+      <h1 className="text-xl my-4 flex place-content-center">Create Glass</h1>
       {loading ? <Spinner /> : ""}
-      <div className="flex flex-col border-2 border-sky-400 rounded-x1 w-[600px] p-4 mx-auto">
+      <div className="flex flex-col border-2 border-sky-400 rounded-xl p-4 mx-auto w-5/6 lg:w-2/3">
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Title</label>
           <input
@@ -75,7 +78,8 @@ export default function CreateGlass() {
           <select
             name="condition"
             id="condition"
-            className="border-2 border-grey-500 w-1/2"
+            value={condition}
+            className="border-2 border-grey-500 w-1/2 rounded-md"
             onChange={(e) => setCondition(e.target.value)}
           >
             Condition
@@ -105,7 +109,7 @@ export default function CreateGlass() {
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">
-            Make an Offer Price (Set a minimum price you're will to take for the item)
+            Make an Offer Price (Set minimum price you will take for the item)
           </label>
           <input
             type="number"
@@ -114,9 +118,9 @@ export default function CreateGlass() {
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
-        <div className="my-4">
-          <h3>Availablitiy</h3>
-          <label className="text-xl mr-4 text-gray-500" htmlFor="available">
+        <div className="my-4 flex items-center justify-around">
+          <div>
+          <label className="text-l mr-4 text-gray-500" htmlFor="available">
             Available
           </label>
           <input
@@ -126,9 +130,11 @@ export default function CreateGlass() {
             name="availability"
             defaultChecked="true"
             onChange={(e) => setAvailability(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            className="border-2 border-gray-500 px-4 py-2"
           />
-          <label className="text-xl mr-4 text-gray-500" htmlFor="not available">
+          </div>
+          <div>
+          <label className="text-l mr-4 text-gray-500 text-center" htmlFor="not available">
             Not Available
           </label>
           <input
@@ -137,11 +143,14 @@ export default function CreateGlass() {
             value="Not Available"
             name="availability"
             onChange={(e) => setAvailability(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            className="border-2 border-gray-500 px-4 py-2"
           />
+          </div>
         </div>
 
         {/* select images */}
+        {/* https://www.mongodb.com/community/forums/t/storing-images-in-mongodb/152599/2 */}
+        {/* best practice is to store files in store image in stoage list Amazon S3 or Google Cloud and have url to image in mongodb */}
         <div className="my-4 flex justify-between">
           <label className="text-xl mr-4 text-gray-500 " htmlFor="image">
             Select an Image:
@@ -149,7 +158,7 @@ export default function CreateGlass() {
           <input type="file" id="image" name="image" />
         </div>
 
-        <button className="p-2 bg-sky-300 m-8" onClick={handleSaveGlass}>
+        <button className="p-2 bg-sky-300 m-8 rounded-md" onClick={handleSaveGlass}>
           Save
         </button>
       </div>
