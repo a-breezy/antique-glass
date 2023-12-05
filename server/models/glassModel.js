@@ -6,7 +6,7 @@ const glassSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    descrption: {
+    description: {
       type: String,
       required: true,
     },
@@ -31,9 +31,9 @@ const glassSchema = mongoose.Schema(
       type: Boolean,
       required: true,
     },
-    images: {
-      type: Array,
-    },
+    // images: {
+    //   type: Array,
+    // },
   },
   {
     timestamps: true,

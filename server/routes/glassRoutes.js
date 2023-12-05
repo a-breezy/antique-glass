@@ -21,9 +21,12 @@ try {
     // testing glass creation
     const newGlass = {
         title: req.body.title,
-        availability: req.body.availability,
-        price: req.body.price,
+        description: req.body.description,
+        condition: req.body.condition,
         quantity: req.body.quantity,
+        price: req.body.price,
+        offerPrice: req.body.offerPrice,
+        availability: req.body.availability,
     };
 
     const glass = await Glass.create(newGlass)
@@ -32,7 +35,7 @@ try {
     
 } catch (error) {
     console.log(error.message)
-    response.status(500).send({message: error.message})
+    res.status(500).send({message: error.message})
 }
 })
 
@@ -72,9 +75,12 @@ router.put('/:id', async (req, res) => {
     try {
         if (
             !req.body.title ||
-            !req.body.availability ||
+            !req.body.description ||
+            !req.body.condition ||
+            !req.body.quantity ||
             !req.body.price ||
-            !req.body.quantity
+            !req.body.offerPrice ||
+            !req.body.availability 
         ) {
             return res.status(400).send({
                 message: 'Send all required fields: title, availability, price, and quantity'
@@ -83,7 +89,6 @@ router.put('/:id', async (req, res) => {
 
         const id = req.params.id;
         const result = await Glass.findByIdAndUpdate(id, req.body);
-        console.log(id, result)
         if (!result) {
             return res.status(404).json({message: "Glass not found"})
         }

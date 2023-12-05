@@ -27,37 +27,49 @@ export default function ShowGlass() {
   return (
     <div className="p-4">
       <BackButton />
-      <h1 className="text-3x1 my-4">ShowGlass</h1>
+      <h1 className="text-xl my-4 flex place-content-center">Viewing Glass</h1>
       {loading ? (
         <Spinner />
       ) : (
-        <div className="flex flex-col border-2 border-sky-400 rounded-x11 w-fit p-4">
-          <div className="my-4">
-            <span className="text-x1 mr-4 text-gray-500">ID</span>
+        <div className="flex flex-col border-2 border-sky-400 rounded-xl p-4 mx-auto w-5/6 lg:w-2/3">
+          <div className="my-4 flex">
+            <span className="text-x1 mr-8 text-gray-500">ID</span>
             <span>{glass._id}</span>
           </div>
-          <div className="my-4">
-            <span className="text-x1 mr-4 text-gray-500">Title</span>
+          <div className="my-4 flex">
+            <span className="text-x1 mr-8 text-gray-500">Title</span>
             <span>{glass.title}</span>
           </div>
-          <div className="my-4">
-            <span className="text-x1 mr-4 text-gray-500">Quantity</span>
+          <div className="my-4 flex">
+            <span className="text-x1 mr-8 text-gray-500">Description</span>
+            <div>{glass.description}</div>
+          </div>
+          <div className="my-4 flex">
+            <span className="text-x1 mr-8 text-gray-500">Condition</span>
+            <span>{glass.condition}</span>
+          </div>
+          <div className="my-4 flex">
+            <span className="text-x1 mr-8 text-gray-500">Quantity</span>
             <span>{glass.quantity}</span>
           </div>
-          <div className="my-4">
-            <span className="text-x1 mr-4 text-gray-500">Price</span>
+          <div className="my-4 flex">
+            <span className="text-x1 mr-8 text-gray-500">Price</span>
             <span>{glass.price}</span>
           </div>
-          <div className="my-4">
-            <span className="text-x1 mr-4 text-gray-500">Availability</span>
-            <span>{glass.availability ? "true" : "false"}</span>
+          <div className="my-4 flex">
+            <span className="text-x1 mr-8 text-gray-500">Offer Price</span>
+            <span>{glass.offer}</span>
           </div>
-          <div className="my-4">
-            <span className="text-x1 mr-4 text-gray-500">Created At</span>
+          <div className="my-4 flex">
+            <span className="text-x1 mr-8 text-gray-500">Availability</span>
+            <span>{glass.availability ? "Yes" : "No"}</span>
+          </div>
+          <div className="my-4 flex">
+            <span className="text-x1 mr-8 text-gray-500">Created At</span>
             <span>{new Date(glass.createdAt).toString()}</span>
           </div>
-          <div className="my-4">
-            <span className="text-x1 mr-4 text-gray-500">Last Update</span>
+          <div className="my-4 flex">
+            <span className="text-x1 mr-8 text-gray-500">Last Update</span>
             <span>{new Date(glass.updatedAt).toString()}</span>
           </div>
         </div>

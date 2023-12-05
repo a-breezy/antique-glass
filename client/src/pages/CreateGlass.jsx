@@ -11,7 +11,7 @@ export default function CreateGlass() {
   const [condition, setCondition] = useState("good");
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
-  const [offer, setOffer] = useState(0);
+  const [offerPrice, setOfferPrice] = useState(0);
   const [availability, setAvailability] = useState(true);
   // const [image, setImage] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -25,7 +25,7 @@ export default function CreateGlass() {
       condition,
       quantity,
       price,
-      offer,
+      offerPrice,
       availability,
     };
     // set catch to make sure that title, quantity, price, and availability are met
@@ -113,38 +113,41 @@ export default function CreateGlass() {
           </label>
           <input
             type="number"
-            value={offer}
-            onChange={(e) => setOffer(e.target.value)}
+            value={offerPrice}
+            onChange={(e) => setOfferPrice(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
         <div className="my-4 flex items-center justify-around">
           <div>
-          <label className="text-l mr-4 text-gray-500" htmlFor="available">
-            Available
-          </label>
-          <input
-            type="radio"
-            id="available"
-            value="Available"
-            name="availability"
-            defaultChecked="true"
-            onChange={(e) => setAvailability(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2"
-          />
+            <label className="text-l mr-4 text-gray-500" htmlFor="available">
+              Available
+            </label>
+            <input
+              type="radio"
+              id="available"
+              value="Available"
+              name="availability"
+              defaultChecked="true"
+              onChange={(e) => setAvailability(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2"
+            />
           </div>
           <div>
-          <label className="text-l mr-4 text-gray-500 text-center" htmlFor="not available">
-            Not Available
-          </label>
-          <input
-            type="radio"
-            id="not available"
-            value="Not Available"
-            name="availability"
-            onChange={(e) => setAvailability(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2"
-          />
+            <label
+              className="text-l mr-4 text-gray-500 text-center"
+              htmlFor="not available"
+            >
+              Not Available
+            </label>
+            <input
+              type="radio"
+              id="not available"
+              value="Not Available"
+              name="availability"
+              onChange={(e) => setAvailability(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2"
+            />
           </div>
         </div>
 
@@ -158,7 +161,10 @@ export default function CreateGlass() {
           <input type="file" id="image" name="image" />
         </div>
 
-        <button className="p-2 bg-sky-300 m-8 rounded-md" onClick={handleSaveGlass}>
+        <button
+          className="p-2 bg-sky-300 m-8 rounded-md"
+          onClick={handleSaveGlass}
+        >
           Save
         </button>
       </div>
