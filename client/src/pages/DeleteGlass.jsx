@@ -2,8 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
-import BackButton from "../components/BackButton";
-import Spinner from "../components/Spinner";
+import BackButton from "../components/Utils/BackButton";
+import Spinner from "../components/Utils/Spinner";
 
 export default function DeleteGlass() {
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ export default function DeleteGlass() {
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Book deleted Successfully", { variant: "success" });
-        navigate("/");
+        navigate("/dashboard");
       })
       .catch((error) => {
         setLoading(false);
@@ -30,7 +30,7 @@ export default function DeleteGlass() {
   };
 
   const handleNotDeleteGlass = () => {
-    navigate("/");
+    navigate("/dashboard");
   };
 
   return (

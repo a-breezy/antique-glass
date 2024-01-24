@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/Utils/Spinner";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
-import GlassTable from "../components/Home/GlassTable";
-import GlassCard from "../components/Home/GlassCard";
+import GlassTable from "../components/Dashboard/GlassTable";
 
-export default function Home() {
+export default function Dashboard() {
   const [glasses, setGlasses] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showType, setShowType] = useState("table");
 
   // search backend for data and return
   useEffect(() => {
@@ -28,36 +26,17 @@ export default function Home() {
 
   return (
     <div className="p-4">
-      <div className="flex justify-center items-center gap-x-4">
-        <button
-          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
-          onClick={() => setShowType("table")}
-        >
-          Table
-        </button>
-        <button
-          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
-          onClick={() => setShowType("card")}
-        >
-          Card
-        </button>
-      </div>
-
-      <div className="flex justify-between items-center">
-        <h1 className="text-3x1 my-8">Glass List</h1>
-        <h2 className="text-3x2 my-8">(Home Page)</h2>
-        <Link to="/glass/create">
+      <div className="flex flex-wrap justify-between items-center">
+        <div>
+          <h1 className="text-3x1 text-center my-8">Dashboard</h1>
+        </div>
+        <Link to="/glass/create" className="flex flex-col justify-around">
           <MdOutlineAddBox className="text-sky-800 text-4x1" />
+          <span>Create A New Glass</span>
         </Link>
       </div>
 
-      {loading ? (
-        <Spinner />
-      ) : showType === "table" ? (
-        <GlassTable glasses={glasses} />
-      ) : (
-        <GlassCard glasses={glasses} />
-      )}
+      {loading ? <Spinner /> : <GlassTable glasses={glasses} />}
     </div>
   );
 }

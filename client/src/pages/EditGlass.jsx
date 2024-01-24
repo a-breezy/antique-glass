@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
-import BackButton from "../components/BackButton";
-import Spinner from "../components/Spinner";
+import BackButton from "../components/Utils/BackButton";
+import Spinner from "../components/Utils/Spinner";
 
 export default function EditGlass() {
   const [title, setTitle] = useState("");
@@ -58,7 +58,7 @@ export default function EditGlass() {
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Glass edited successfully!", { variant: "success" });
-        navigate("/");
+        navigate("/dashboard");
       })
       .catch((error) => {
         setLoading(false);

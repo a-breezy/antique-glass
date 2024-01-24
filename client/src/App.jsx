@@ -4,7 +4,7 @@ import CreateGlass from './pages/CreateGlass'
 import DeleteGlass from './pages/DeleteGlass'
 import EditGlass from './pages/EditGlass'
 import ShowGlass from './pages/ShowGlass'
-import Home from './pages/Dashboard'
+import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 
 export const App = () => {
