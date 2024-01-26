@@ -34,6 +34,9 @@ const glassSchema = mongoose.Schema(
     // images: {
     //   type: Array,
     // },
+    image: {
+      type: String,
+    },
   },
   {
     timestamps: true,

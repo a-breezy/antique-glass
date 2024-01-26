@@ -17,7 +17,6 @@ export const App = () => {
         <Route path='/glass/edit/:id' element={<EditGlass />} />
         <Route path='/glass/delete/:id' element={<DeleteGlass />} />
     </Routes>
-    // <div className='bg-red-400 text-white'>App</div>
   )
 }
 

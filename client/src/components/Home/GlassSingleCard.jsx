@@ -16,31 +16,62 @@ export const GlassSingleCard = ({ glass }) => {
     return glass;
   };
 
+  const {
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = "set Glass State";
+
+  const quantity = 1;
+
   return (
     <div
       key={glass._id}
       className="border-2 border-gray-500 rounded-lg px-4 m-4 relative hover:shadow-xl"
     >
-      <div className="p-2 m-1 border-2 border-gray-300 rounded h-44">
-        <h2>Image goes here</h2> {/* take away when ready */}
-        {/* <a href=`/glass/details/${glass._id}`><img src="link to image" alt=`${glass.title} glass for sale`> </a> */}
+      <div className="p-2 mt-4 border-2 border-gray-300 rounded h-44 flex place-content-center">
+        <img
+          src={glass.image}
+          alt={`${glass.title} glass for sale`}
+          className="h-full"
+        />
       </div>
 
       <h2 className="px-4 py-1 rounded-lg">
         Set of {glass.quantity} {checkPlural(glass.title)} Glasses
       </h2>
-      {/* <h4 className="my-4 text-gray-500">{glass._id}</h4> */}
+
       <div className="flex justify-end items-center gap-x-2">
         <FaMoneyBillAlt className="text-reg-300 text-2x1" />
         <h2 className="my-1">{glass.price}</h2>
       </div>
-      
 
       <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
+        {/* set modal to show glass in page */}
         <BiShow
           className="text-3x1 text-blue-800 hover:text-black cursor-pointer"
           onClick={() => setShowModal(true)}
         />
+
+        {/* button to add to cart and increase/decrease quantity */}
+        <div className="basis-1/2">
+          {!quantity ? (
+            <button onClick={increaseCartQuantity}>Add to cart</button>
+          ) : (
+            <div className="flex justify-center items-center">
+              <div className="px-5 border border-blue-500 rounded-l-lg bg-blue-500">
+                -
+              </div>
+              <div className="border-y px-5 border-blue-500">{quantity}</div>
+              <div className="px-5 border border-blue-500 rounded-r-lg bg-blue-500">
+                +
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* link to glass page */}
         <Link to={`/glass/details/${glass._id}`}>
           <BsInfoCircle className="text-2x1 text-green-800" />
         </Link>

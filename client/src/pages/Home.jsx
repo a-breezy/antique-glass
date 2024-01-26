@@ -3,13 +3,11 @@ import axios from "axios";
 import Spinner from "../components/Utils/Spinner";
 // import { Link } from "react-router-dom";
 import GlassCard from "../components/Home/GlassCard";
-import Cart from "../components/Home/Cart";
-
+import NavBar from "../components/NavBar/NavBar";
 
 export default function Home() {
   const [glasses, setGlasses] = useState([]);
   const [loading, setLoading] = useState(false);
-  //   const [showType, setShowType] = useState("table");
 
   // search backend for data and return
   useEffect(() => {
@@ -30,6 +28,7 @@ export default function Home() {
   // take away when finished
   let sampleGlasses = [
     {
+      _id: 0,
       title: "Coup",
       description: "A glass for drinking Champagne.",
       condition: "great",
@@ -37,8 +36,10 @@ export default function Home() {
       price: 20,
       offerPrice: 16,
       availability: true,
+      image: "../../assets/imgs/coups.jpg",
     },
     {
+      _id: 1,
       title: "Nic and Nora",
       description: "A glass for small cocktails",
       condition: "great",
@@ -46,24 +47,41 @@ export default function Home() {
       price: 40,
       offerPrice: 30,
       availability: true,
+      image: "../../assets/imgs/nicAndNora.jpg",
+    },
+    {
+      _id: 2,
+      title: "Flute",
+      description: "Tall glass predominately for drinking Champagne.",
+      condition: "Clean",
+      quantity: "6",
+      price: 60,
+      offerPrice: 40,
+      availability: true,
+      image: "../../assets/imgs/flutes.jpg",
+    },
+    {
+      _id: 3,
+      title: "Rocks",
+      description: "Short glass for neat and drinks on ice",
+      condition: "great",
+      quantity: "5",
+      price: 40,
+      offerPrice: 30,
+      availability: true,
+      image: "../../assets/imgs/rocks.jpg",
     },
   ];
+
   useEffect(() => {
     setGlasses(sampleGlasses);
+    // setCartItems(sampleGlasses[2])
   }, []);
 
   return (
-    <div className="p-4">
-      <div className="flex justify-between flex-wrap">
-        <div className="flex flex-col text-center">
-          <h1 className="text-3xl">Antique Glass</h1>
-          <h2 className="text-xl">Your Place for Unique Glassware</h2>
-        </div>
-        {/* on click show items */}
-        <Cart />
-      </div>
-
+    <>
+      <NavBar />
       {loading ? <Spinner /> : <GlassCard glasses={glasses} />}
-    </div>
+    </>
   );
 }
