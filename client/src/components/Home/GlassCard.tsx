@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import React from "react";
 import { GlassSingleCard } from "./GlassSingleCard";
 
 export default function GlassCard({ glasses }) {

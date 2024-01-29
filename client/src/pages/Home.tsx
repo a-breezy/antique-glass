@@ -1,9 +1,34 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Spinner from "../components/Utils/Spinner";
 // import { Link } from "react-router-dom";
 import GlassCard from "../components/Home/GlassCard";
 import NavBar from "../components/NavBar/NavBar";
+
+type glasses = {
+  _id: number;
+  title: string;
+  description: string;
+  condition: string;
+  quantity: string;
+  price: number;
+  offerPrice: number;
+  availability: boolean;
+  image: string;
+};
+
+// take away when finished
+type sampleGlasses = {
+  _id: number;
+  title: string;
+  description: string;
+  condition: string;
+  quantity: string;
+  price: number;
+  offerPrice: number;
+  availability: boolean;
+  image: string;
+};
 
 export default function Home() {
   const [glasses, setGlasses] = useState([]);

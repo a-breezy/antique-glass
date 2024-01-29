@@ -1,13 +1,15 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { IoCartOutline, IoCart } from "react-icons/io5";
 
+type quantity = number;
 export default function NavBar() {
   const quantity = 1;
 
   return (
     <div className="flex justify-between flex-wrap shadow-lg p-4 bg-slate-200">
       <div className="flex flex-col text-center">
-        <Link>
+        <Link to={"/"}>
           <h1 className="text-3xl">Antique Glass</h1>
         </Link>
         <h2 className="text-xl">Your Place for Unique Glassware</h2>

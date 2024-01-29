@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { BsInfoCircle } from "react-icons/bs";
 import { BiShow } from "react-icons/bi";
 import { FaMoneyBillAlt } from "react-icons/fa";
-import { useState } from "react";
+import React, { useState } from "react";
 import GlassModal from "./GlassModal";
 
 export const GlassSingleCard = ({ glass }) => {
@@ -23,7 +23,7 @@ export const GlassSingleCard = ({ glass }) => {
     removeFromCart,
   } = "set Glass State";
 
-  const quantity = 1;
+  const quantity = 0;
 
   return (
     <div
@@ -57,16 +57,27 @@ export const GlassSingleCard = ({ glass }) => {
         {/* button to add to cart and increase/decrease quantity */}
         <div className="basis-1/2">
           {!quantity ? (
-            <button onClick={increaseCartQuantity}>Add to cart</button>
+            <button
+              className="px-5 w-full border border-blue-500 rounded-lg bg-blue-500"
+              onClick={increaseCartQuantity}
+            >
+              Add to cart
+            </button>
           ) : (
             <div className="flex justify-center items-center">
-              <div className="px-5 border border-blue-500 rounded-l-lg bg-blue-500">
+              <button
+                className="px-5 border border-blue-500 rounded-l-lg bg-blue-500"
+                onClick={() => decreaseCartQuantity()}
+              >
                 -
-              </div>
+              </button>
               <div className="border-y px-5 border-blue-500">{quantity}</div>
-              <div className="px-5 border border-blue-500 rounded-r-lg bg-blue-500">
+              <button
+                className="px-5 border border-blue-500 rounded-r-lg bg-blue-500"
+                onClick={() => increaseCartQuantity()}
+              >
                 +
-              </div>
+              </button>
             </div>
           )}
         </div>

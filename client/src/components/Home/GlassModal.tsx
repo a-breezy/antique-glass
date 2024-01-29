@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { CgUnavailable } from "react-icons/cg";
