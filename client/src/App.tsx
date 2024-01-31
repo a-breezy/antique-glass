@@ -8,10 +8,12 @@ import ShowGlass from "./pages/ShowGlass";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
+import NavBar from "./components/NavBar/NavBar";
 
 export const App = () => {
   return (
     <ShoppingCartProvider>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />

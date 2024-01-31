@@ -3,22 +3,9 @@ import axios from "axios";
 import Spinner from "../components/Utils/Spinner";
 // import { Link } from "react-router-dom";
 import GlassCard from "../components/Home/GlassCard";
-import NavBar from "../components/NavBar/NavBar";
 
-type glasses = {
-  _id: number;
-  title: string;
-  description: string;
-  condition: string;
-  quantity: string;
-  price: number;
-  offerPrice: number;
-  availability: boolean;
-  image: string;
-};
 
-// take away when finished
-type sampleGlasses = {
+type Glass = {
   _id: number;
   title: string;
   description: string;
@@ -31,7 +18,7 @@ type sampleGlasses = {
 };
 
 export default function Home() {
-  const [glasses, setGlasses] = useState([]);
+  const [glasses, setGlasses] = useState<Glass[] | null>([]);
   const [loading, setLoading] = useState(false);
 
   // search backend for data and return
@@ -51,7 +38,7 @@ export default function Home() {
   }, []);
 
   // take away when finished
-  let sampleGlasses = [
+  let sampleGlasses: Glass[] = [
     {
       _id: 0,
       title: "Coup",
@@ -103,10 +90,5 @@ export default function Home() {
     // setCartItems(sampleGlasses[2])
   }, []);
 
-  return (
-    <>
-      <NavBar />
-      {loading ? <Spinner /> : <GlassCard glasses={glasses} />}
-    </>
-  );
+  return <>{loading ? <Spinner /> : <GlassCard glasses={glasses} />}</>;
 }
