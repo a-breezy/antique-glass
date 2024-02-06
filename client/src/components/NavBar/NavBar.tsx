@@ -1,18 +1,16 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { IoCartOutline, IoCart } from "react-icons/io5";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
+import ShoppingCart from "../ShoppingCart/ShoppingCart";
+
+type ShoppingCartProps = {
+  isOpen: boolean;
+  cartQuantity: number;
+
+}
 
 export default function NavBar() {
-  // const {
-  //   getItemQuantity,
-  //   increaseCartQuantity,
-  //   decreaseCartQuantity,
-  //   removeFromCart,
-  // } = useShoppingCart();
-
-  // const cartQuantity = getItemQuantity;
-  const cartQuantity = 0;
+  const { openCart, cartQuantity, isOpen } = useShoppingCart();
 
   return (
     <div className="flex justify-between flex-wrap shadow-lg p-4 bg-slate-200">
@@ -30,18 +28,21 @@ export default function NavBar() {
       </div>
 
       <div className="flex flex-wrap content-center w-11">
-        <button className="w-full h-full relative">
+        <button className="w-full h-full relative" onClick={openCart}>
           {cartQuantity == 0 ? (
             <IoCartOutline className="w-full h-full" />
           ) : (
             <div>
-              <IoCart className="w-full h-full" />
+              <IoCart className="w-full h-full" onClick={openCart} />
+
               <div className="absolute bottom-1.5 -right-1 w-6 rounded-full bg-red-400 text-white">
                 {cartQuantity}
               </div>
             </div>
           )}
         </button>
+        {isOpen ? <ShoppingCart cartQuantity={cartQuantity} openCart={openCart} /> : null}
+        {console.log(isOpen)}
       </div>
     </div>
   );

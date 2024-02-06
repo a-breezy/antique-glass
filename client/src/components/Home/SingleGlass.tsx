@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { BsInfoCircle } from "react-icons/bs";
 import { BiShow } from "react-icons/bi";
 import { FaMoneyBillAlt } from "react-icons/fa";
-import React, { useState } from "react";
-import GlassModal from "./GlassModal";
+import { useState } from "react";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
+import GlassModal from "./GlassModal";
 
 type SingleGlassProps = {
   _id: number;
@@ -22,14 +22,11 @@ type SingleGlassProps = {
 export const SingleGlass = ({
   _id,
   title,
-  description,
-  condition,
   quantity,
   price,
-  offerPrice,
-  availability,
   image,
 }: SingleGlassProps) => {
+
   const [showModal, setShowModal] = useState(false);
   const [maxQuantity, setMaxQuantity] = useState(false);
 
@@ -73,14 +70,11 @@ export const SingleGlass = ({
           className="text-3x1 text-blue-800 hover:text-black cursor-pointer"
           onClick={() => setShowModal(true)}
         />
-
-        {/* button to add to cart and increase/decrease quantity */}
         <div className="basis-1/2">
           {!cartQuantity ? (
             <button
               className="px-5 w-full border border-blue-500 rounded-lg bg-blue-500"
               onClick={() => {
-                console.log(getItemQuantity(_id), quantity);
                 increaseCartQuantity(_id);
               }}
             >
@@ -141,8 +135,8 @@ export const SingleGlass = ({
         </Link>
       </div>
       {showModal && (
-        // <GlassModal glass={glass} onClose={() => setShowModal(false)} />
-        <div></div>
+        <GlassModal glass={{_id, title, quantity, price, image}} onClose={() => setShowModal(false)} />
+        // <div></div>
       )}
     </div>
   );

@@ -1,11 +1,22 @@
 /* eslint-disable react/prop-types */
-import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { CgUnavailable } from "react-icons/cg";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
-export default function GlassModal({ glass, onClose }) {
+type SingleGlassProps = {
+  _id: number;
+  title: string;
+  description: string;
+  condition: string;
+  quantity: string;
+  price: number;
+  offerPrice: number;
+  availability: boolean;
+  image: string;
+};
+
+export default function GlassModal({ glass, onClose }: SingleGlassProps) {
   return (
     <div
       className="fixed bg-black bg-opacity-60 top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center"
