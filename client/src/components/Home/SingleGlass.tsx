@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import GlassModal from "./GlassModal";
 
-type SingleGlassProps = {
+type GlassItem = {
   _id: number;
   title: string;
   description: string;
@@ -19,12 +19,12 @@ type SingleGlassProps = {
   image: string;
 };
 
+type SingleGlassProps = {
+  glass: GlassItem;
+}
+
 export const SingleGlass = ({
-  _id,
-  title,
-  quantity,
-  price,
-  image,
+  glass
 }: SingleGlassProps) => {
 
   const [showModal, setShowModal] = useState(false);
@@ -44,24 +44,24 @@ export const SingleGlass = ({
     removeFromCart,
   } = useShoppingCart();
 
-  const cartQuantity = getItemQuantity(_id);
+  const cartQuantity = getItemQuantity(glass._id);
 
   return (
     <div
-      key={_id}
+      key={glass._id}
       className="border-2 border-gray-500 rounded-lg px-4 m-4 relative hover:shadow-xl"
     >
       <div className="p-2 mt-4 border-2 border-gray-300 rounded h-44 flex place-content-center">
-        <img src={image} alt={`${title} glass for sale`} className="h-full" />
+        <img src={glass.image} alt={`${glass.title} glass for sale`} className="h-full" />
       </div>
 
       <h2 className="px-4 py-1 rounded-lg">
-        Set of {quantity} {checkPlural(title)}
+        Set of {glass.quantity} {checkPlural(glass.title)}
       </h2>
 
       <div className="flex justify-end items-center gap-x-2">
         <FaMoneyBillAlt className="text-reg-300 text-2x1" />
-        <h2 className="my-1">{price}</h2>
+        <h2 className="my-1">{glass.price}</h2>
       </div>
 
       <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
@@ -75,7 +75,7 @@ export const SingleGlass = ({
             <button
               className="px-5 w-full border border-blue-500 rounded-lg bg-blue-500"
               onClick={() => {
-                increaseCartQuantity(_id);
+                increaseCartQuantity(glass._id);
               }}
             >
               Add to cart
@@ -86,11 +86,11 @@ export const SingleGlass = ({
                 <button
                   className="px-5 border border-blue-500 rounded-l-lg bg-blue-500"
                   onClick={() => {
-                    if (getItemQuantity(_id) == parseInt(quantity)) {
+                    if (getItemQuantity(glass._id) == parseInt(glass.quantity)) {
                       setMaxQuantity(false);
-                      decreaseCartQuantity(_id);
+                      decreaseCartQuantity(glass._id);
                     }
-                    decreaseCartQuantity(_id);
+                    decreaseCartQuantity(glass._id);
                   }}
                 >
                   -
@@ -106,9 +106,9 @@ export const SingleGlass = ({
                   } rounded-r-lg`}
                   onClick={() => {
                     {
-                      if (getItemQuantity(_id) < parseInt(quantity)) {
-                        increaseCartQuantity(_id);
-                        if (getItemQuantity(_id) == parseInt(quantity) - 1)
+                      if (getItemQuantity(glass._id) < parseInt(glass.quantity)) {
+                        increaseCartQuantity(glass._id);
+                        if (getItemQuantity(glass._id) == parseInt(glass.quantity) - 1)
                           setMaxQuantity(true);
                       }
                     }
@@ -120,7 +120,7 @@ export const SingleGlass = ({
               <div className="flex justify-center">
                 <button
                   className="px-5 my-1 border border-red-500 rounded-lg bg-red-500"
-                  onClick={() => removeFromCart(_id)}
+                  onClick={() => removeFromCart(glass._id)}
                 >
                   Remove From Cart
                 </button>
@@ -130,13 +130,12 @@ export const SingleGlass = ({
         </div>
 
         {/* link to glass page */}
-        <Link to={`/glass/details/${_id}`}>
+        <Link to={`/glass/details/${glass._id}`}>
           <BsInfoCircle className="text-2x1 text-green-800" />
         </Link>
       </div>
       {showModal && (
-        <GlassModal glass={{_id, title, quantity, price, image}} onClose={() => setShowModal(false)} />
-        // <div></div>
+        <GlassModal glass={glass} onClose={() => setShowModal(false)} />
       )}
     </div>
   );

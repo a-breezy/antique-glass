@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import Spinner from "../components/Utils/Spinner";
-// import { Link } from "react-router-dom";
-// import GlassCard from "../components/Home/GlassCard";
 import { SingleGlass } from "../components/Home/SingleGlass";
 
 type Glass = {
@@ -94,10 +92,10 @@ export default function Home() {
       {loading ? (
         <Spinner />
       ) : (
-        // <GlassCard glasses={glasses} />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {glasses.map(
             (item): Glass => (
+              // console.log({item})
               <SingleGlass key={item._id} {...item} />
             )
           )}

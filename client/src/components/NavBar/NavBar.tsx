@@ -3,12 +3,6 @@ import { IoCartOutline, IoCart } from "react-icons/io5";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 
-type ShoppingCartProps = {
-  isOpen: boolean;
-  cartQuantity: number;
-
-}
-
 export default function NavBar() {
   const { openCart, cartQuantity, isOpen } = useShoppingCart();
 

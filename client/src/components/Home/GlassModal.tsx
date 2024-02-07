@@ -4,7 +4,7 @@ import { FaMoneyBillAlt } from "react-icons/fa";
 import { CgUnavailable } from "react-icons/cg";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
-type SingleGlassProps = {
+type GlassItem = {
   _id: number;
   title: string;
   description: string;
@@ -16,7 +16,12 @@ type SingleGlassProps = {
   image: string;
 };
 
-export default function GlassModal({ glass, onClose }: SingleGlassProps) {
+type GlassModalProps = {
+  glass: GlassItem;
+  onClose: () => void;
+}
+
+export default function GlassModal({ glass, onClose}: GlassModalProps) {
   return (
     <div
       className="fixed bg-black bg-opacity-60 top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center"

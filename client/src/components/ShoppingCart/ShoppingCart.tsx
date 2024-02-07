@@ -1,7 +1,11 @@
 import { useContext } from "react";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 
-export default function ShoppingCart({ cartQuantity }) {
+type ShoppingCartProps = {
+    cartQuantity: number;
+}
+
+export default function ShoppingCart({ cartQuantity }: ShoppingCartProps) {
   const {closeCart} = useShoppingCart()
   return (
     <div className="w-1/3 absolute z-10 p-2 right-0 top-24 bg-gray-200 border-l-2 border-b-2 border-solid border-black rounded-bl-lg">
