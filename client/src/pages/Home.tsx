@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Spinner from "../components/Utils/Spinner";
 // import { Link } from "react-router-dom";
-import GlassCard from "../components/Home/GlassCard";
-
+// import GlassCard from "../components/Home/GlassCard";
+import { SingleGlass } from "../components/Home/SingleGlass";
 
 type Glass = {
   _id: number;
@@ -22,20 +22,20 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   // search backend for data and return
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get("http://localhost:5555/glass")
-      .then((res) => {
-        setGlasses(res.data.data);
-        setLoading(false);
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   axios
+  //     .get("http://localhost:5555/glass")
+  //     .then((res) => {
+  //       setGlasses(res.data.data);
+  //       setLoading(false);
+  //       console.log(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   // take away when finished
   let sampleGlasses: Glass[] = [
@@ -87,8 +87,22 @@ export default function Home() {
 
   useEffect(() => {
     setGlasses(sampleGlasses);
-    // setCartItems(sampleGlasses[2])
   }, []);
 
-  return <>{loading ? <Spinner /> : <GlassCard glasses={glasses} />}</>;
+  return (
+    <>
+      {loading ? (
+        <Spinner />
+      ) : (
+        // <GlassCard glasses={glasses} />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {glasses.map(
+            (item): Glass => (
+              <SingleGlass key={item._id} {...item} />
+            )
+          )}
+        </div>
+      )}
+    </>
+  );
 }
