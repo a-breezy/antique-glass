@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-// import axios from "axios";
+import { useState, useEffect, Fragment } from "react";
+import axios from "axios";
 import Spinner from "../components/Utils/Spinner";
 import { SingleGlass } from "../components/Home/SingleGlass";
 
-type Glass = {
+type GlassItem = {
   _id: number;
   title: string;
   description: string;
@@ -16,27 +16,11 @@ type Glass = {
 };
 
 export default function Home() {
-  const [glasses, setGlasses] = useState<Glass[] | null>([]);
+  const [glasses, setGlasses] = useState<GlassItem[] | null>([]);
   const [loading, setLoading] = useState(false);
 
-  // search backend for data and return
-  // useEffect(() => {
-  //   setLoading(true);
-  //   axios
-  //     .get("http://localhost:5555/glass")
-  //     .then((res) => {
-  //       setGlasses(res.data.data);
-  //       setLoading(false);
-  //       console.log(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       setLoading(false);
-  //     });
-  // }, []);
-
   // take away when finished
-  let sampleGlasses: Glass[] = [
+  let sampleGlasses: GlassItem[] | null = [
     {
       _id: 0,
       title: "Coup",
@@ -84,7 +68,23 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    setGlasses(sampleGlasses);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // uncomment when launching
+        // const res = await axios.get("http://localhost:5555/glass");
+        // if (res) {
+        //   setGlasses(res.data.data);
+        //   setLoading(false);
+        // }
+        setGlasses(sampleGlasses);
+      } catch (error: unknown) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
@@ -93,12 +93,11 @@ export default function Home() {
         <Spinner />
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {glasses.map(
-            (item): Glass => (
-              // console.log({item})
-              <SingleGlass key={item._id} {...item} />
-            )
-          )}
+          {glasses!.map((item) => (
+            <Fragment key={item._id}>
+              <SingleGlass glass={item} />
+            </Fragment>
+          ))}
         </div>
       )}
     </>
