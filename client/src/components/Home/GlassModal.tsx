@@ -19,9 +19,9 @@ type GlassItem = {
 type GlassModalProps = {
   glass: GlassItem;
   onClose: () => void;
-}
+};
 
-export default function GlassModal({ glass, onClose}: GlassModalProps) {
+export default function GlassModal({ glass, onClose }: GlassModalProps) {
   return (
     <div
       className="fixed bg-black bg-opacity-60 top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center"
@@ -51,12 +51,9 @@ export default function GlassModal({ glass, onClose}: GlassModalProps) {
           <h2 className="my-1">{glass.availability.toString()}</h2>
         </div>
 
-        <p className="mt-4">Depict some information about the glass here</p>
-        <p className="my-2">
-          Give more broad information about the glass and whatever else you can
-          think about it to give the user more information about what
-          they&aposre buying here
-        </p>
+        <div>
+          <p className="my-2">{glass.description}</p>
+        </div>
       </div>
     </div>
   );

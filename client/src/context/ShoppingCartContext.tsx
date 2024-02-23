@@ -1,5 +1,13 @@
-import { ReactNode, useContext, createContext, useState } from "react";
-
+import {
+  ReactNode,
+  useContext,
+  createContext,
+  useState,
+  useEffect,
+} from "react";
+import axios from "axios";
+// remove after testing
+import sampleGlasses from "../../public/assets/sampleGlasses.json";
 
 type ShoppingCartProviderProps = {
   children: ReactNode;
@@ -7,6 +15,7 @@ type ShoppingCartProviderProps = {
 
 // define type for shoppingCartContext
 type ShoppingCartContext = {
+  toggleCart: () => void;
   openCart: () => void;
   closeCart: () => void;
   getItemQuantity: (id: number) => number;
@@ -14,14 +23,26 @@ type ShoppingCartContext = {
   decreaseCartQuantity: (id: number) => void;
   removeFromCart: (id: number) => void;
   cartQuantity: number;
-  isOpen: boolean,
+  isOpen: boolean;
   cartItems: CartItem[];
+  storeItems: Item[];
 };
 
-// define what a CartItem looks like
 type CartItem = {
   id: number;
   quantity: number;
+};
+
+type Item = {
+  _id: number;
+  title: string;
+  description: string;
+  condition: string;
+  quantity: number;
+  price: number;
+  offerPrice: number;
+  availability: boolean;
+  image: string;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -33,12 +54,32 @@ export function useShoppingCart() {
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [storeItems, setStoreItems] = useState<Item[]>([]);
+
+  const fetchData = async () => {
+    try {
+      //! uncomment when going live
+      // const res = await axios.get("http:localhost:5555/glass");
+      // if (res) {
+      //   setGlasses(res.data.data);
+      // }
+      setStoreItems(sampleGlasses);
+      // return storeItems;
+    } catch (error: unknown) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const cartQuantity = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,
     0
   );
 
+  const toggleCart = () => setIsOpen(!isOpen);
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
 
@@ -94,12 +135,13 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         removeFromCart,
         openCart,
         closeCart,
+        toggleCart,
         cartQuantity,
         cartItems,
-        isOpen
+        isOpen,
+        storeItems,
       }}
     >
-
       {children}
     </ShoppingCartContext.Provider>
   );

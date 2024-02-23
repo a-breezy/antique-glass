@@ -4,7 +4,7 @@ import { useShoppingCart } from "../../context/ShoppingCartContext";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 
 export default function NavBar() {
-  const { openCart, cartQuantity, isOpen } = useShoppingCart();
+  const { cartQuantity, isOpen, toggleCart } = useShoppingCart();
 
   return (
     <div className="flex justify-between flex-wrap shadow-lg p-4 bg-slate-200">
@@ -22,21 +22,21 @@ export default function NavBar() {
       </div>
 
       <div className="flex flex-wrap content-center w-11">
-        <button className="w-full h-full relative" onClick={openCart}>
-          {cartQuantity == 0 ? (
+        <button className="w-full h-full relative" onClick={toggleCart}>
+          {!cartQuantity ? (
             <IoCartOutline className="w-full h-full" />
           ) : (
             <div>
-              <IoCart className="w-full h-full" onClick={openCart} />
-
+              <IoCart className="w-full h-full" />
               <div className="absolute bottom-1.5 -right-1 w-6 rounded-full bg-red-400 text-white">
                 {cartQuantity}
               </div>
             </div>
           )}
         </button>
-        {isOpen ? <ShoppingCart cartQuantity={cartQuantity} openCart={openCart} /> : null}
-        {console.log(isOpen)}
+        {isOpen && cartQuantity ? (
+          <ShoppingCart />
+        ) : null}
       </div>
     </div>
   );
