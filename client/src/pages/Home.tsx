@@ -32,7 +32,7 @@ export default function Home() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {storeItems!.map((item) => (
             <Fragment key={item._id}>
-              <SingleGlass glass={item} />
+              <SingleGlass item={item} />
             </Fragment>
           ))}
         </div>

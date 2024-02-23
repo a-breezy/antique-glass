@@ -7,12 +7,12 @@ import { useState } from "react";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import GlassModal from "./GlassModal";
 
-type GlassItem = {
+type Item = {
   _id: number;
   title: string;
   description: string;
   condition: string;
-  quantity: string;
+  quantity: number;
   price: number;
   offerPrice: number;
   availability: boolean;
@@ -20,21 +20,18 @@ type GlassItem = {
 };
 
 type SingleGlassProps = {
-  glass: GlassItem;
-}
+  item: Item;
+};
 
-export const SingleGlass = ({
-  glass
-}: SingleGlassProps) => {
-
+export const SingleGlass = ({ item }: SingleGlassProps) => {
   const [showModal, setShowModal] = useState(false);
   const [maxQuantity, setMaxQuantity] = useState(false);
 
-  const checkPlural = (glass: string) => {
-    if (glass.charAt(glass.length - 1) !== "s") {
-      return glass + "s";
+  const checkPlural = (item: string) => {
+    if (item.charAt(item.length - 1) !== "s") {
+      return item + "s";
     }
-    return glass;
+    return item;
   };
 
   const {
@@ -44,28 +41,32 @@ export const SingleGlass = ({
     removeFromCart,
   } = useShoppingCart();
 
-  const cartQuantity = getItemQuantity(glass._id);
+  const cartQuantity = getItemQuantity(item._id);
 
   return (
     <div
-      key={glass._id}
+      key={item._id}
       className="border-2 border-gray-500 rounded-lg px-4 m-4 relative hover:shadow-xl"
     >
       <div className="p-2 mt-4 border-2 border-gray-300 rounded h-44 flex place-content-center">
-        <img src={glass.image} alt={`${glass.title} glass for sale`} className="h-full" />
+        <img
+          src={item.image}
+          alt={`${item.title} item for sale`}
+          className="h-full"
+        />
       </div>
 
       <h2 className="px-4 py-1 rounded-lg">
-        Set of {glass.quantity} {checkPlural(glass.title)}
+        Set of {item.quantity} {checkPlural(item.title)}
       </h2>
 
       <div className="flex justify-end items-center gap-x-2">
         <FaMoneyBillAlt className="text-reg-300 text-2x1" />
-        <h2 className="my-1">{glass.price}</h2>
+        <h2 className="my-1">{item.price}</h2>
       </div>
 
       <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
-        {/* set modal to show glass in page */}
+        {/* set modal to show item in page */}
         <BiShow
           className="text-3x1 text-blue-800 hover:text-black cursor-pointer"
           onClick={() => setShowModal(true)}
@@ -75,7 +76,7 @@ export const SingleGlass = ({
             <button
               className="px-5 w-full border border-blue-500 rounded-lg bg-blue-500"
               onClick={() => {
-                increaseCartQuantity(glass._id);
+                increaseCartQuantity(item._id);
               }}
             >
               Add to cart
@@ -86,11 +87,13 @@ export const SingleGlass = ({
                 <button
                   className="px-5 border border-blue-500 rounded-l-lg bg-blue-500"
                   onClick={() => {
-                    if (getItemQuantity(glass._id) == parseInt(glass.quantity)) {
+                    if (
+                      getItemQuantity(item._id) == parseInt(item.quantity)
+                    ) {
                       setMaxQuantity(false);
-                      decreaseCartQuantity(glass._id);
+                      decreaseCartQuantity(item._id);
                     }
-                    decreaseCartQuantity(glass._id);
+                    decreaseCartQuantity(item._id);
                   }}
                 >
                   -
@@ -106,9 +109,14 @@ export const SingleGlass = ({
                   } rounded-r-lg`}
                   onClick={() => {
                     {
-                      if (getItemQuantity(glass._id) < parseInt(glass.quantity)) {
-                        increaseCartQuantity(glass._id);
-                        if (getItemQuantity(glass._id) == parseInt(glass.quantity) - 1)
+                      if (
+                        getItemQuantity(item._id) < item.quantity
+                      ) {
+                        increaseCartQuantity(item._id);
+                        if (
+                          getItemQuantity(item._id) ==
+                          item.quantity - 1
+                        )
                           setMaxQuantity(true);
                       }
                     }
@@ -120,7 +128,7 @@ export const SingleGlass = ({
               <div className="flex justify-center">
                 <button
                   className="px-5 my-1 border border-red-500 rounded-lg bg-red-500"
-                  onClick={() => removeFromCart(glass._id)}
+                  onClick={() => removeFromCart(item._id)}
                 >
                   Remove From Cart
                 </button>
@@ -129,13 +137,14 @@ export const SingleGlass = ({
           )}
         </div>
 
-        {/* link to glass page */}
-        <Link to={`/glass/details/${glass._id}`}>
+        {/* link to item page */}
+        {/* must change backend to reflect item naming, not glass naming */}
+        <Link to={`/glass/details/${item._id}`}>
           <BsInfoCircle className="text-2x1 text-green-800" />
         </Link>
       </div>
       {showModal && (
-        <GlassModal glass={glass} onClose={() => setShowModal(false)} />
+        <GlassModal item={item} onClose={() => setShowModal(false)} />
       )}
     </div>
   );
