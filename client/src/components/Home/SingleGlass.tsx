@@ -87,9 +87,7 @@ export const SingleGlass = ({ item }: SingleGlassProps) => {
                 <button
                   className="px-5 border border-blue-500 rounded-l-lg bg-blue-500"
                   onClick={() => {
-                    if (
-                      getItemQuantity(item._id) == parseInt(item.quantity)
-                    ) {
+                    if (getItemQuantity(item._id) == item.quantity) {
                       setMaxQuantity(false);
                       decreaseCartQuantity(item._id);
                     }
@@ -109,14 +107,9 @@ export const SingleGlass = ({ item }: SingleGlassProps) => {
                   } rounded-r-lg`}
                   onClick={() => {
                     {
-                      if (
-                        getItemQuantity(item._id) < item.quantity
-                      ) {
+                      if (getItemQuantity(item._id) < item.quantity) {
                         increaseCartQuantity(item._id);
-                        if (
-                          getItemQuantity(item._id) ==
-                          item.quantity - 1
-                        )
+                        if (getItemQuantity(item._id) == item.quantity - 1)
                           setMaxQuantity(true);
                       }
                     }

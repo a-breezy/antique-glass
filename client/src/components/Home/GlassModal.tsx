@@ -9,7 +9,7 @@ type Item = {
   title: string;
   description: string;
   condition: string;
-  quantity: string;
+  quantity: number;
   price: number;
   offerPrice: number;
   availability: boolean;

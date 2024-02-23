@@ -56,7 +56,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [storeItems, setStoreItems] = useState<Item[]>([]);
 
-  const fetchData = async () => {
+  // fetch data and set to storeItems
+  useEffect(() => {
     try {
       //! uncomment when going live
       // const res = await axios.get("http:localhost:5555/glass");
@@ -64,14 +65,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       //   setGlasses(res.data.data);
       // }
       setStoreItems(sampleGlasses);
-      // return storeItems;
     } catch (error: unknown) {
       console.log(error);
     }
-  };
-
-  useEffect(() => {
-    fetchData();
   }, []);
 
   const cartQuantity = cartItems.reduce(
