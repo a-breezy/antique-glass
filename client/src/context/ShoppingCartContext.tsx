@@ -6,7 +6,8 @@ import {
   useEffect,
 } from "react";
 import axios from "axios";
-// remove after testing
+
+//! remove after testing
 import sampleGlasses from "../../public/assets/sampleGlasses.json";
 
 type ShoppingCartProviderProps = {
@@ -64,12 +65,13 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       // if (res) {
       //   setGlasses(res.data.data);
       // }
+      //! remove when live
       setStoreItems(sampleGlasses);
     } catch (error: unknown) {
       console.log(error);
     }
   }, []);
-
+  
   const cartQuantity = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,
     0
