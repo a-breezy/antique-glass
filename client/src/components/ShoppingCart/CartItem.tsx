@@ -1,4 +1,5 @@
 import { useShoppingCart } from "../../context/ShoppingCartContext";
+import QuantityButton from "../Utils/QuantityButton";
 
 type CartItemProps = {
   id: number;
@@ -18,7 +19,8 @@ export function CartItem({ id, quantity }: CartItemProps) {
 
   const cartItem: CartItem | undefined = storeItems.find((i) => i._id === id);
   if (cartItem == null) return null;
-
+  
+  console.log(cartItem)
   return (
     <div className="flex flex-row h-1/4 max-h-40 my-4">
       <div className="w-1/2 h-40">
@@ -43,12 +45,7 @@ export function CartItem({ id, quantity }: CartItemProps) {
             </button>
           </div>
         </div>
-        {/* //! make this button a component and reuse on home page */}
-        <div className="px-3 border border-black rounded flex justify-between">
-          <button>+</button>
-          <div>{quantity}</div>
-          <button>+</button>
-        </div>
+        <QuantityButton id={id} quantity={cartItem.quantity} style={"cart"} />
       </div>
     </div>
   );

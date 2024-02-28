@@ -6,6 +6,7 @@ import { FaMoneyBillAlt } from "react-icons/fa";
 import { useState } from "react";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import GlassModal from "./GlassModal";
+import QuantityButton from "../Utils/QuantityButton";
 
 type Item = {
   _id: number;
@@ -14,8 +15,6 @@ type Item = {
   condition: string;
   quantity: number;
   price: number;
-  offerPrice: number;
-  availability: boolean;
   image: string;
 };
 
@@ -25,7 +24,6 @@ type SingleGlassProps = {
 
 export const SingleGlass = ({ item }: SingleGlassProps) => {
   const [showModal, setShowModal] = useState(false);
-  const [maxQuantity, setMaxQuantity] = useState(false);
 
   const checkPlural = (item: string) => {
     if (item.charAt(item.length - 1) !== "s") {
@@ -83,41 +81,11 @@ export const SingleGlass = ({ item }: SingleGlassProps) => {
             </button>
           ) : (
             <>
-              <div className="flex justify-center items-center">
-                <button
-                  className="px-5 border border-blue-500 rounded-l-lg bg-blue-500"
-                  onClick={() => {
-                    if (getItemQuantity(item._id) == item.quantity) {
-                      setMaxQuantity(false);
-                      decreaseCartQuantity(item._id);
-                    }
-                    decreaseCartQuantity(item._id);
-                  }}
-                >
-                  -
-                </button>
-                <div className="border-y px-5 border-blue-500">
-                  {cartQuantity}
-                </div>
-                <button
-                  className={`px-5 border ${
-                    maxQuantity
-                      ? "border-red-500 bg-red-200"
-                      : "border-blue-500 bg-blue-500"
-                  } rounded-r-lg`}
-                  onClick={() => {
-                    {
-                      if (getItemQuantity(item._id) < item.quantity) {
-                        increaseCartQuantity(item._id);
-                        if (getItemQuantity(item._id) == item.quantity - 1)
-                          setMaxQuantity(true);
-                      }
-                    }
-                  }}
-                >
-                  +
-                </button>
-              </div>
+              <QuantityButton
+                id={item._id}
+                quantity={item.quantity}
+                style={"home"}
+              />
               <div className="flex justify-center">
                 <button
                   className="px-5 my-1 border border-red-500 rounded-lg bg-red-500"
