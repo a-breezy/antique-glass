@@ -71,7 +71,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       console.log(error);
     }
   }, []);
-  
+
   const cartQuantity = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,
     0
@@ -86,7 +86,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   }
 
   function increaseCartQuantity(id: number) {
-    // if cartItem quantity = quantity of item break
     setCartItems((currentItems) => {
       if (cartItems.find((item) => item.id == id) == null) {
         return [...cartItems, { id, quantity: 1 }];

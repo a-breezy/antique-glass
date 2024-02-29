@@ -12,57 +12,63 @@ const buttonStyles = [
   "border-black hover:bg-blue-100",
 ];
 
+const quantityStyles = ["border-blue-500", "border-black"];
+
 export default function QuantityButton({ id, quantity, style }: Item) {
   const [maxQuantity, setMaxQuantity] = useState(false);
   const [buttonStyle, setButtonStyle] = useState(0);
+  const [quantityStyle, setQuantityStyle] = useState(0);
 
   const { getItemQuantity, decreaseCartQuantity, increaseCartQuantity } =
     useShoppingCart();
 
   const cartQuantity = getItemQuantity(id);
 
-  const checkMaxQuantity = () => {
-    if (getItemQuantity(id) == quantity) {
-      setMaxQuantity(false);
-      decreaseCartQuantity(id);
-    }
-    decreaseCartQuantity(id);
-  };
-
-  // style 0 is for home button
-  // style 1 is for cart button
   useEffect(() => {
     if (style == "home") {
       setButtonStyle(0);
+      setQuantityStyle(0);
     } else if (style == "cart") {
       setButtonStyle(1);
+      setQuantityStyle(1);
     }
   }, []);
+
+  useEffect(() => {
+    if (cartQuantity === quantity) setMaxQuantity(true);
+  }, [cartQuantity]);
+
+  const handleQuantityDecrease = () => {
+    if (cartQuantity === quantity) {
+      setMaxQuantity(false);
+      decreaseCartQuantity(id);
+    } else {
+      decreaseCartQuantity(id);
+    }
+  };
+
+  const handleQuantityIncrease = () => {
+    if (cartQuantity < quantity) {
+      increaseCartQuantity(id);
+    }
+  };
 
   return (
     <div className="flex justify-center">
       <button
         className={`px-5 border rounded-l-lg ${buttonStyles[buttonStyle]}`}
-        onClick={() => {
-          checkMaxQuantity();
-        }}
+        onClick={() => handleQuantityDecrease()}
       >
         -
       </button>
-      <div className="border-y px-5 border-blue-500">{cartQuantity}</div>
+      <div className={`border-y px-5 ${quantityStyles[quantityStyle]}`}>
+        {cartQuantity}
+      </div>
       <button
         className={`px-5 border ${
           maxQuantity ? "border-red-500 bg-red-200" : buttonStyles[buttonStyle]
         } rounded-r-lg`}
-        onClick={() => {
-          {
-            console.log(getItemQuantity(id));
-            if (getItemQuantity(id) < quantity) {
-              increaseCartQuantity(id);
-              if (getItemQuantity(id) == quantity - 1) setMaxQuantity(true);
-            }
-          }
-        }}
+        onClick={() => handleQuantityIncrease()}
       >
         +
       </button>
