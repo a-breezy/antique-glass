@@ -9,6 +9,7 @@ import axios from "axios";
 
 //! remove after testing
 import sampleGlasses from "../../public/assets/sampleGlasses.json";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 type ShoppingCartProviderProps = {
   children: ReactNode;
@@ -54,7 +55,7 @@ export function useShoppingCart() {
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("cart", []);
   const [storeItems, setStoreItems] = useState<Item[]>([]);
 
   // fetch data and set to storeItems
