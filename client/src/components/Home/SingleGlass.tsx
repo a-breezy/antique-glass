@@ -15,6 +15,7 @@ type Item = {
   condition: string;
   quantity: number;
   price: number;
+  availability: boolean;
   image: string;
 };
 
@@ -35,7 +36,6 @@ export const SingleGlass = ({ item }: SingleGlassProps) => {
   const {
     getItemQuantity,
     increaseCartQuantity,
-    decreaseCartQuantity,
     removeFromCart,
   } = useShoppingCart();
 

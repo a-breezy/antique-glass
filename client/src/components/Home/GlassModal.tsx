@@ -11,7 +11,6 @@ type Item = {
   condition: string;
   quantity: number;
   price: number;
-  offerPrice: number;
   availability: boolean;
   image: string;
 };
