@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 export default function About() {
   return (
-    <div className="m-14 min-h-full">
-      <div className="w-1/2 grid justify-items-center py-4">
+    <div className="lg:m-14 min-h-full">
+      <div className="lg:w-1/2 grid justify-items-center py-4">
         <h1 className="text-xl">Antique Glass</h1>
       </div>
       <div className="flex justify-center">
-        <div className="basis-1/2">
+        <div className="lg:basis-1/2 p-2">
           <p className="py-4">
             Based in New York City with pieces sourced from all over the United
             States, Antique Glass houses unique glassware for all occasions.

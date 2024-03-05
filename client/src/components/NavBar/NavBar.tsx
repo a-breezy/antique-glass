@@ -16,11 +16,9 @@ export default function NavBar() {
           <h2 className="text-xl">Your Place for Unique Glassware</h2>
         </div>
         {/* add buttons for various pages */}
-        <div className="flex flex-row w-1/3 justify-around items-center">
+        <div className="flex lg:flex-row flex-col w-1/3 lg:justify-around justify-center items-center">
           <h2 className="px-2">Store</h2>
-          <Link to="/about">
-            <h2 className="px-2">About</h2>
-          </Link>
+          <Link to="/about"><h2 className="px-2">About</h2></Link>
         </div>
       </div>
 
