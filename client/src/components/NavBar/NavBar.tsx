@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import { IoCartOutline, IoCart } from "react-icons/io5";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import CartButton from "./CartButton";
 
 export default function NavBar() {
-  const { cartQuantity, isOpen, toggleCart } = useShoppingCart();
+  const { cartQuantity, isOpen } = useShoppingCart();
 
   return (
     <div className="flex justify-between flex-wrap shadow-lg p-4 bg-slate-200">
@@ -19,7 +18,9 @@ export default function NavBar() {
         {/* add buttons for various pages */}
         <div className="flex flex-row w-1/3 justify-around items-center">
           <h2 className="px-2">Store</h2>
-          <h2 className="px-2">About</h2>
+          <Link to="/about">
+            <h2 className="px-2">About</h2>
+          </Link>
         </div>
       </div>
 
