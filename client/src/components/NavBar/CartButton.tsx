@@ -11,7 +11,7 @@ export default function CartButton() {
       ) : (
         <div>
           <IoCart className="w-full h-full" />
-          <div className="absolute lg:bottom-1.5 bottom-12 -right-1 w-6 rounded-full bg-red-400 text-white">
+          <div className="absolute lg:bottom-6 bottom-12 -right-1 w-6 rounded-full bg-red-400 text-white">
             {cartQuantity}
           </div>
         </div>

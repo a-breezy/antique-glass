@@ -20,7 +20,7 @@ export default function Home() {
       >
         <div className="flex flex-wrap place-content-center border border-slate-600 bg-slate-200 hover:bg-slate-400 opacity-80 hover:opacity-70 w-60 h-24">
           <Link to="/store">
-            <h2 className="font-mono">Come see our store</h2>
+            <h2 className="font-mono">See Our Store</h2>
           </Link>
         </div>
       </div>
