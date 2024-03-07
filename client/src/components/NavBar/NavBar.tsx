@@ -7,7 +7,7 @@ export default function NavBar() {
   const { cartQuantity, isOpen } = useShoppingCart();
 
   return (
-    <div className="flex justify-between flex-wrap shadow-lg p-4 bg-slate-200">
+    <div className="flex justify-between flex-wrap h-36 shadow-lg p-4 bg-slate-200">
       <div className="flex flex-row w-1/2 justify-around">
         <div className="flex flex-col text-center">
           <Link to="/">
@@ -17,8 +17,12 @@ export default function NavBar() {
         </div>
         {/* add buttons for various pages */}
         <div className="flex lg:flex-row flex-col w-1/3 lg:justify-around justify-center items-center">
-          <h2 className="px-2">Store</h2>
-          <Link to="/about"><h2 className="px-2">About</h2></Link>
+          <Link to="/store">
+            <h2 className="px-2">Store</h2>
+          </Link>
+          <Link to="/about">
+            <h2 className="px-2">About</h2>
+          </Link>
         </div>
       </div>
 

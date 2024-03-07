@@ -5,10 +5,11 @@ import DeleteGlass from "./pages/DeleteGlass";
 import EditGlass from "./pages/EditGlass";
 import ShowGlass from "./pages/ShowGlass";
 import Home from "./pages/Home";
+import NavBar from "./components/NavBar/NavBar";
 import About from "./pages/About"
+import Store from "./pages/Store";
 import Dashboard from "./pages/Dashboard";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
-import NavBar from "./components/NavBar/NavBar";
 
 export default function App ()  {
   return (
@@ -17,6 +18,7 @@ export default function App ()  {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/store" element={<Store />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/glass/create" element={<CreateGlass />} />
         <Route path="/glass/details/:id" element={<ShowGlass />} />

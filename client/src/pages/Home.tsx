@@ -1,6 +1,4 @@
 import { useState, Fragment } from "react";
-import axios from "axios";
-import Spinner from "../components/Utils/Spinner";
 import { SingleGlass } from "../components/Home/SingleGlass";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 
@@ -10,18 +8,19 @@ export default function Home() {
   const { storeItems } = useShoppingCart();
 
   return (
-    <>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {storeItems!.map((item) => (
-            <Fragment key={item._id}>
-              <SingleGlass item={item} />
-            </Fragment>
-          ))}
-        </div>
-      )}
-    </>
+    <div>
+      <div
+        style={{
+          backgroundImage: "url(/assets/imgs/home-banner.jpg)",
+          width: "100vw",
+          height: "calc(100vh - 9rem)",
+          backgroundSize: "100%",
+          backgroundPosition: "center bottom"
+        }}
+      >
+        test
+        {/* <img src={banner} /> */}
+      </div>
+    </div>
   );
 }
