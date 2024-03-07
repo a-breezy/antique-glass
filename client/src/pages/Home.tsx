@@ -1,13 +1,6 @@
-import { useState, Fragment } from "react";
-import { SingleGlass } from "../components/Home/SingleGlass";
-import { useShoppingCart } from "../context/ShoppingCartContext";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  // const [glasses, setGlasses] = useState<GlassItem[] | null>([]);
-  const [loading, setLoading] = useState(false);
-  const { storeItems } = useShoppingCart();
-
   return (
     <div>
       <div
