@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const glassSchema = mongoose.Schema(
+const productSchema = mongoose.Schema(
   {
     title: {
       type: String,
@@ -43,4 +43,4 @@ const glassSchema = mongoose.Schema(
   }
 );
 
-export const Glass = mongoose.model("Glass", glassSchema);
+export const Product = mongoose.model("Product", productSchema);

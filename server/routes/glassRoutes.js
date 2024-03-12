@@ -1,5 +1,5 @@
 import express from "express";
-import { Glass } from "../models/glassModel.js";
+import { Product } from "../models";
 
 const router = express.Router();
 

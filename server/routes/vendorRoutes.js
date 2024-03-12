@@ -1,5 +1,5 @@
 import express from "express";
-import {Vendor} from "../models/vendorModel.js";
+import {Vendor} from "../models";
 import bcrypt from "bcrypt";
 
 const router = express.Router();
