@@ -23,10 +23,10 @@ const glassSchema = mongoose.Schema(
       required: true,
     },
     // set price minimum price that item can sell for
-    offerPrice: {
-      type: Number,
-      required: true,
-    },
+    // offerPrice: {
+    //   type: Number,
+    //   required: true,
+    // },
     availability: {
       type: Boolean,
       required: true,

@@ -17,6 +17,8 @@ export default function App ()  {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
+        {/* create an admin login and signup */}
+        {/* <Route path="/vendor" element={<AdminLogIn />} /> */}
         <Route path="/about" element={<About />} />
         <Route path="/store" element={<Store />} />
         <Route path="/dashboard" element={<Dashboard />} />
