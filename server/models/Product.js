@@ -6,14 +6,20 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    vendor: {
+      type: mongoose.ObjectId,
+      required: true,
+    },
     description: {
       type: String,
       required: true,
     },
-    condition: {
-      type: String,
-      required: true,
-    },
+    condition: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
     quantity: {
       type: Number,
       required: true,
