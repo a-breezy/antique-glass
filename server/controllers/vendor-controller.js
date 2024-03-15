@@ -9,7 +9,7 @@ const vendorController = {
       return res.status(200).json({ data: vendors });
     } catch (err) {
       console.log(err);
-      res.status(500).send({ message: err.message });
+      res.status(500).json({ message: err.message });
     }
   },
 
@@ -21,7 +21,7 @@ const vendorController = {
       return res.status(200).json(vendor);
     } catch (err) {
       console.log(err.message);
-      res.status(500).send({ message: err.message });
+      res.status(500).json({ message: err.message });
     }
   },
 
@@ -29,17 +29,14 @@ const vendorController = {
   createVendor: async ({ body }, res) => {
     try {
       const newVendor = {
-        firstName: body.firstName,
-        lastName: body.lastName,
-        email: body.email,
+        ...body,
         password: await bcrypt.hash(body.password, 10),
       };
-      console.log(newVendor);
       const vendor = await Vendor.create(newVendor);
-      return res.status(201).send(vendor);
+      return res.status(201).json(vendor);
     } catch (err) {
       console.log(err.message);
-      res.status(500).send({ message: err.message });
+      res.status(500).json({ message: err.message });
     }
   },
   // update vendor -- uncertain if I will make this yet

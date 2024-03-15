@@ -8,18 +8,17 @@ const productSchema = mongoose.Schema(
     },
     vendor: {
       type: mongoose.ObjectId,
+      ref: 'Vendor',
       required: true,
     },
     description: {
       type: String,
       required: true,
     },
-    condition: [
-      {
-        type: String,
-        required: true,
-      },
-    ],
+    condition: {
+      type: String,
+      required: true,
+    },
     quantity: {
       type: Number,
       required: true,
@@ -29,17 +28,16 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     // set price minimum price that item can sell for
-    // offerPrice: {
-    //   type: Number,
-    //   required: true,
-    // },
+    offerPrice: {
+      type: Number,
+    },
     availability: {
       type: Boolean,
       required: true,
     },
-    // images: {
+    // images: [{
     //   type: Array,
-    // },
+    // }],
     image: {
       type: String,
     },
