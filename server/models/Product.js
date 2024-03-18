@@ -8,7 +8,7 @@ const productSchema = mongoose.Schema(
     },
     vendor: {
       type: mongoose.ObjectId,
-      ref: 'Vendor',
+      ref: "Vendor",
       required: true,
     },
     description: {

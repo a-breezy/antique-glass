@@ -18,7 +18,7 @@ const productController = {
   // get single product
   getProductById: async ({ params }, res) => {
     try {
-      const product = await Product.findById({ _id: params.id });
+      const product = await Product.findById({ _id: params.productId });
       if (!product)
         return res.status(404).json({ message: "Product not found" });
       return res.status(200).json(product);
@@ -63,7 +63,7 @@ const productController = {
   //update product
   updateProduct: async ({ params, body }, res) => {
     try {
-      const product = await Product.findOneAndUpdate({ _id: params.id }, body, {
+      const product = await Product.findOneAndUpdate({ _id: params.productId }, body, {
         new: true,
       });
       if (!product)
@@ -81,13 +81,13 @@ const productController = {
   //delete product
   deleteProduct: async ({ params }, res) => {
     try {
-      const product = await Product.findByIdAndDelete({ _id: params.id });
+      const product = await Product.findByIdAndDelete({ _id: params.productId });
       if (!product)
         return res.status(404).json({ message: "Product not found" });
 
       const vendor = await Vendor.findByIdAndUpdate(
         product.vendor,
-        { $pull: { products: params.id } },
+        { $pull: { products: params.productId } },
         { new: true }
       );
       if (!vendor) return res.status(404).json({ message: "Vendor not found" });
