@@ -4,7 +4,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
 
-export default function GlassTable({ glasses }) {
+export default function ProductTable({ products }) {
   return (
     <table className="w-full border-separate border-spacing-2">
       <thead>
@@ -23,38 +23,39 @@ export default function GlassTable({ glasses }) {
       </thead>
 
       <tbody>
-        {glasses.map((glass, index) => (
-          <tr key={glass._id} className="h-8">
+        {products.map((product, index) => (
+          <tr key={product._id} className="h-8">
+            {console.log(product.availability)}
             <td className="border border-slate-700 rounded-md text-center">
               {index + 1}
             </td>
 
             <td className="border border-slate-700 rounded-md text-center">
-              {glass.title}
+              {product.title}
             </td>
 
             <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-              {glass.quantity}
+              {product.quantity}
             </td>
 
             <td className="border border-slate-700 rounded-md text-center">
-              {glass.price}
+              {product.price}
             </td>
 
             <td className="border border-slate-700 rounded-md text-center max-md:hidden">
               {/* onClick set to false and update db */}
-              {/* {glass.availability.toString()} */}
+              {product.availability ? "yes" : "no"}
             </td>
 
             <td className="border border-slate-700 rounded-md text-center">
               <div className="flex justify-center gap-x-4">
-                <Link to={`/glass/details/${glass._id}`}>
+                <Link to={`/product/details/${product._id}`}>
                   <BsInfoCircle className="text-2x1 text-green-800" />
                 </Link>
-                <Link to={`/glass/edit/${glass._id}`}>
+                <Link to={`/product/edit/${product._id}`}>
                   <AiOutlineEdit className="text-2x1 text-yellow-600" />
                 </Link>
-                <Link to={`/glass/delete/${glass._id}`}>
+                <Link to={`/product/delete/${product._id}`}>
                   <MdOutlineDelete className="text-2x1 text-red-600" />
                 </Link>
               </div>
