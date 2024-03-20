@@ -12,9 +12,14 @@ export default function Dashboard() {
   // search backend for data and return
   useEffect(() => {
     setLoading(true);
+    // check localStorage for token
+    
     axios
-      .get("http://localhost:5555/glass")
+      // .get("http://localhost:5555/")
+      // fetch data from mongodb
+      .get("http://localhost:5555/vendor/65f3555b4a06172ef1651ccc")
       .then((res) => {
+        console.log(res);
         setGlasses(res.data.data);
         setLoading(false);
       })

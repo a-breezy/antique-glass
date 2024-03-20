@@ -6,12 +6,12 @@ import EditGlass from "./pages/EditGlass";
 import ShowGlass from "./pages/ShowGlass";
 import Home from "./pages/Home";
 import NavBar from "./components/NavBar/NavBar";
-import About from "./pages/About"
+import About from "./pages/About";
 import Store from "./pages/Store";
 import Dashboard from "./pages/Dashboard";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 
-export default function App ()  {
+export default function App() {
   return (
     <ShoppingCartProvider>
       <NavBar />
@@ -22,12 +22,15 @@ export default function App ()  {
         {/* create login and signup */}
         {/* <Route path='/login' element={<Login />} /> */}
         {/* <Route path='/signup' element={<Signup />} /> */}
-        <Route path="/vendor/:id/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/vendor/:id/product/create" element={<CreateGlass />} />
         <Route path="/vendor/:id/product/details/:id" element={<ShowGlass />} />
         <Route path="/vendor/:id/product/edit/:id" element={<EditGlass />} />
-        <Route path="/vendor/:id/product/delete/:id" element={<DeleteGlass />} />
+        <Route
+          path="/vendor/:id/product/delete/:id"
+          element={<DeleteGlass />}
+        />
       </Routes>
     </ShoppingCartProvider>
   );
-};
+}

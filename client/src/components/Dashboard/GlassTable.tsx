@@ -43,7 +43,7 @@ export default function GlassTable({ glasses }) {
 
             <td className="border border-slate-700 rounded-md text-center max-md:hidden">
               {/* onClick set to false and update db */}
-              {glass.availability.toString()}
+              {/* {glass.availability.toString()} */}
             </td>
 
             <td className="border border-slate-700 rounded-md text-center">
