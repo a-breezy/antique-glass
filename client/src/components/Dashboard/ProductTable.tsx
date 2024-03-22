@@ -25,7 +25,6 @@ export default function ProductTable({ products }) {
       <tbody>
         {products.map((product, index) => (
           <tr key={product._id} className="h-8">
-            {console.log(product.availability)}
             <td className="border border-slate-700 rounded-md text-center">
               {index + 1}
             </td>

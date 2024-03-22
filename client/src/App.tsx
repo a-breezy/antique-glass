@@ -10,6 +10,7 @@ import About from "./pages/About";
 import Store from "./pages/Store";
 import Dashboard from "./pages/Dashboard";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
+import Login from "./components/Login/Login";
 
 export default function App() {
   return (
@@ -20,7 +21,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/store" element={<Store />} />
         {/* create login and signup */}
-        {/* <Route path='/login' element={<Login />} /> */}
+        <Route path='/login' element={<Login />} />
         {/* <Route path='/signup' element={<Signup />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/vendor/:id/product/create" element={<CreateGlass />} />

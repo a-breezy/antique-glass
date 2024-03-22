@@ -4,6 +4,7 @@ import Spinner from "../components/Utils/Spinner";
 import { Link, redirect } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 import ProductTable from "../components/Dashboard/ProductTable";
+import Auth from "../utils/auth";
 
 export default function Dashboard() {
   const [products, setProducts] = useState([]);
@@ -12,11 +13,12 @@ export default function Dashboard() {
   // search backend for data and return
   useEffect(() => {
     setLoading(true);
-    let loginToken = localStorage.getItem("loginToken");
-    if (!loginToken) redirect("/login"); // send back to homepage
+    // let loginToken = localStorage.getItem("loginToken");
+    console.log(Auth.getToken());
+    // if (!loginToken) redirect("/login"); // send back to homepage
 
     axios({
-      url: "http://localhost:5555/vendor/65f3555b4a06172ef1651ccc",
+      url: "vendor/65f3555b4a06172ef1651ccc",
       method: "get",
       headers: { Authorization: `Bearer ${loginToken}` },
     })

@@ -3,7 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
-import authToken from "./utils/auth.js";
+import {authToken} from "./utils/auth.js";
 
 import productRoutes from "./routes/productRoutes.js";
 import vendorRoutes from "./routes/vendorRoutes.js";

@@ -2,7 +2,7 @@ import "dotenv/config";
 import jwt from "jsonwebtoken";
 
 // create a token to authenticate user
-const authToken = (req, res, next) => {
+export const authToken = function (req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
@@ -16,7 +16,7 @@ const authToken = (req, res, next) => {
 };
 
 // validate token from user
-const validateToken = (req, res, next) => {
+export const validateToken = function (req, res, next) {
   let token = req.body.token || req.query.token || req.headers.authorization;
   // if coming from header split 'bearer' from token
   if (req.headers.authorization) {
@@ -28,9 +28,7 @@ const validateToken = (req, res, next) => {
     req.vendor = data;
   } catch (err) {
     console.log(err);
-    return res.sendStatus(403)
+    return res.sendStatus(403);
   }
   return req;
 };
-
-export default authToken;
