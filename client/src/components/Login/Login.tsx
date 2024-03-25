@@ -6,7 +6,7 @@ import Auth from "../../utils/auth.js";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const [error, setError] = useState()
+  const [error, setError] = useState("")
 
   const handleChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -17,14 +17,13 @@ export default function Login() {
     event.preventDefault();
     try {
       const data = await axios.post("http://localhost:5555/login", credentials);
-      setTimeout(() => {
 
-      }, 3000);
       if (data != null) {
         Auth.login(data.data.token);
         // reroute to dashboard with credentials if success
       }
       // else set message that there was an error
+      else setError("Eemail or  passworare i nc")
     } catch (err) {
       console.log(err);
     }
@@ -58,6 +57,7 @@ export default function Login() {
         <br />
         <button type="submit">Submit</button>
       </form>
+      {error ? <div>It seems like there was an error</div> : null}
     </div>
   );
 }
