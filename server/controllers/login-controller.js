@@ -12,16 +12,16 @@ const loginController = {
     if (!vendor) return res.status(401).json({ message: "Vendor not found" });
     try {
       const validPassword = await bcrypt.compare(password, vendor.password);
-      console.log(validPassword);
       if (!validPassword) {
-        return res.status(401).json({ message: "Invalid username or password" });
+        return res
+          .status(401)
+          .json({ message: "Invalid username or password" });
       }
 
       const token = jwt.sign({ email }, process.env.SECRET_TOKEN, {
         expiresIn: "1h",
       });
-      console.log(token);
-      return res.json({ token: token });
+      return res.json({ id: vendor._id, token: token });
     } catch (err) {
       console.log(err);
 

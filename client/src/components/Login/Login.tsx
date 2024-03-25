@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, redirect } from "react-router-dom";
-// import { MdOutlineAddBox } from "react-icons/md";
 import Auth from "../../utils/auth.js";
 
 export default function Login() {
@@ -20,7 +19,7 @@ export default function Login() {
       if (data != null) {
         setError("Login successful, sending you to your dashboard...");
         setTimeout(() => {
-          Auth.login(data.data.token);
+          Auth.login(data.data.id, data.data.token);
         }, 3000);
       }
     } catch (err) {

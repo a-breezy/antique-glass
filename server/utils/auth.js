@@ -18,7 +18,6 @@ export const authToken = function (req, res, next) {
 // validate token from user
 export const validateToken = function (req, res, next) {
   let token = req.body.token || req.query.token || req.headers.authorization;
-  // if coming from header split 'bearer' from token
   if (req.headers.authorization) {
     token = token.split(" ").pop().trim();
   }

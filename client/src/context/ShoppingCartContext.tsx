@@ -62,7 +62,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   useEffect(() => {
     try {
       //! uncomment when going live
-      // const res = await axios.get("http:localhost:5555/glass");
+      // const res = await axios.get("http:localhost:5555/products");
       // if (res) {
       //   setGlasses(res.data.data);
       // }
