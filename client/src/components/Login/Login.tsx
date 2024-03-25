@@ -6,7 +6,7 @@ import Auth from "../../utils/auth.js";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
   const handleChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -17,47 +17,60 @@ export default function Login() {
     event.preventDefault();
     try {
       const data = await axios.post("http://localhost:5555/login", credentials);
-
       if (data != null) {
-        Auth.login(data.data.token);
-        // reroute to dashboard with credentials if success
+        setError("Login successful, sending you to your dashboard...");
+        setTimeout(() => {
+          Auth.login(data.data.token);
+        }, 3000);
       }
-      // else set message that there was an error
-      else setError("Eemail or  passworare i nc")
     } catch (err) {
+      setError("Email or password incorrect");
       console.log(err);
     }
   };
 
   return (
-    <div className="p-4">
+    <div className="h-52 mt-16 mr-auto ml-auto flex flex-col place-items-center justify-between border-4 rounded-md md:w-1/2">
       <div className="flex flex-wrap justify-between items-center">
-        <h1>Login</h1>
+        <h1 className="p-2">Login</h1>
       </div>
-      <form onSubmit={handleFormSubmit}>
-        Email
-        <input
-          type="email"
-          placeholder="enter"
-          name="email"
-          id="email"
-          value={credentials.email}
-          onChange={handleChange}
-        />
-        <br />
-        Password
-        <input
-          type="password"
-          name="password"
-          placeholder="enter"
-          id="password"
-          value={credentials.password}
-          onChange={handleChange}
-        />
-        <br />
-        <button type="submit">Submit</button>
-      </form>
-      {error ? <div>It seems like there was an error</div> : null}
+      <div className="w-1/2 flex flex-col">
+        <form onSubmit={handleFormSubmit}>
+          <div className="p-2 flex justify-between">
+            Email
+            <input
+              type="email"
+              placeholder="martha@here.com"
+              name="email"
+              id="email"
+              value={credentials.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="p-2 flex justify-between">
+            Password
+            <input
+              type="password"
+              name="password"
+              placeholder="********"
+              id="password"
+              value={credentials.password}
+              onChange={handleChange}
+            />
+          </div>
+          <button
+            type="submit"
+            className="m-2 w-full self-center border-4 rounded border-slate-300 hover:border-black hover:bg-orange-400"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      {error != "" ? (
+        <div className="p-4 border-2 rounded bg-red-200">
+          <div>{error}</div>
+        </div>
+      ) : null}
     </div>
   );
 }

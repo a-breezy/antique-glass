@@ -3,6 +3,7 @@ class Auth {
   login(token: string) {
     console.log(token);
     localStorage.setItem("loginToken", token);
+    
     window.location.assign("/dashboard");
   }
 
