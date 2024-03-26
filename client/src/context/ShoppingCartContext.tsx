@@ -6,10 +6,6 @@ import {
   useEffect,
 } from "react";
 import axios from "axios";
-
-//! remove after testing
-// import sampleGlasses from "../../public/assets/sampleGlasses.json";
-
 import useLocalStorage from "../hooks/useLocalStorage";
 
 type ShoppingCartProviderProps = {
@@ -69,8 +65,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       console.log(error);
     }
   }, []);
-
-
 
   const cartQuantity = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,

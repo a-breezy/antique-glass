@@ -63,13 +63,13 @@ export default function ProductTable({ products }: ProductTableProps) {
 
             <td className="border border-slate-700 rounded-md text-center">
               <div className="flex justify-center gap-x-4">
-                <Link to={`/product/details/${product._id}`}>
+                <Link to={`/products/details/${product._id}`}>
                   <BsInfoCircle className="text-2x1 text-green-800" />
                 </Link>
-                <Link to={`/product/edit/${product._id}`}>
+                <Link to={`/products/edit/${product._id}`}>
                   <AiOutlineEdit className="text-2x1 text-yellow-600" />
                 </Link>
-                <Link to={`/product/delete/${product._id}`}>
+                <Link to={`/products/delete/${product._id}`}>
                   <MdOutlineDelete className="text-2x1 text-red-600" />
                 </Link>
               </div>
