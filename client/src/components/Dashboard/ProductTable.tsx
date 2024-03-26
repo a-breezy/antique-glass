@@ -17,9 +17,10 @@ type Product = {
 
 type ProductTableProps = {
   products: Product[];
+  vendor: string;
 };
 
-export default function ProductTable({ products }: ProductTableProps) {
+export default function ProductTable({ products, vendor }: ProductTableProps) {
   return (
     <table className="w-full border-separate border-spacing-2">
       <thead>
@@ -63,13 +64,13 @@ export default function ProductTable({ products }: ProductTableProps) {
 
             <td className="border border-slate-700 rounded-md text-center">
               <div className="flex justify-center gap-x-4">
-                <Link to={`/products/details/${product._id}`}>
+                <Link to={`/products/${product._id}`}>
                   <BsInfoCircle className="text-2x1 text-green-800" />
                 </Link>
-                <Link to={`/products/edit/${product._id}`}>
+                <Link to={`/dashboard/${vendor}/edit/${product._id}`}>
                   <AiOutlineEdit className="text-2x1 text-yellow-600" />
                 </Link>
-                <Link to={`/products/delete/${product._id}`}>
+                <Link to={`/dashboard/${vendor}/delete/${product._id}`}>
                   <MdOutlineDelete className="text-2x1 text-red-600" />
                 </Link>
               </div>

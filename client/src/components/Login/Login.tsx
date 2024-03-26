@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-// import { Link, redirect } from "react-router-dom";
 import Auth from "../../utils/auth.js";
 
 export default function Login() {

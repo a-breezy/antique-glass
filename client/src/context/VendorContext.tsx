@@ -11,8 +11,8 @@ import { redirect, useParams, useNavigate } from "react-router-dom";
 
 type VendorContext = {
   products: Product[];
-  message: string;
-  deleteProduct: (id: number) => void;
+//   message: string;
+//   deleteProduct: (vendorId: string, productId: string) => void;
   editProduct: (id: number) => void;
   toggleAvailability: (id: number) => void;
 };
@@ -40,7 +40,7 @@ export function useVendor() {
 
 export function VendorProvider({ children }: VendorProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
-  const [message, setMessage] = useState("");
+//   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -70,21 +70,6 @@ export function VendorProvider({ children }: VendorProviderProps) {
     // return success to page
   }
 
-  // delete item from vendor
-  function deleteProduct(id: number) {
-    axios
-      .delete(`http://localhost:5555/products/${id}`)
-      .then(() => {
-        setMessage("Success, redirecting you to your dashboard");
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 3000);
-      })
-      .catch((error) => {
-        setMessage("An error occurred, please try deleting again");
-        console.log(error);
-      });
-  }
 
   // change product availability from true to false
   function toggleAvailability(id: number) {
@@ -97,9 +82,9 @@ export function VendorProvider({ children }: VendorProviderProps) {
       value={{
         // add export functions here
         products,
-        message,
+        // message,
         editProduct,
-        deleteProduct,
+        // deleteProduct,
         toggleAvailability,
       }}
     >

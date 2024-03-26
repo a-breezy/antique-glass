@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 import ProductTable from "../components/Dashboard/ProductTable";
 import { useVendor } from "../context/VendorContext";
 
 export default function Dashboard() {
   const { products } = useVendor();
+  const { vendorId } = useParams();
 
   return (
     <div className="p-4">
@@ -18,7 +19,7 @@ export default function Dashboard() {
         </Link>
       </div>
 
-      <ProductTable products={products} />
+      <ProductTable products={products} vendor={vendorId || ""} />
     </div>
   );
 }

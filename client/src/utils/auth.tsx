@@ -9,7 +9,7 @@ class Auth {
     console.log(token);
     localStorage.setItem("userId", id);
     localStorage.setItem("loginToken", token);
-    window.location.assign("/dashboard");
+    window.location.assign(`/dashboard/${id}`);
   }
 
   // remove token and send user to homepage
@@ -23,7 +23,7 @@ class Auth {
     let id = localStorage.getItem("userId");
     let token = localStorage.getItem("loginToken");
     if (!id || !token) {
-    //  window.location.assign("/login");
+      //  window.location.assign("/login");
       return null;
     } else return { id, token };
   }

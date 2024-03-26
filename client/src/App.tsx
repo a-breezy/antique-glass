@@ -25,12 +25,11 @@ export default function App() {
           {/* create login and signup */}
           <Route path="/login" element={<Login />} />
           {/* <Route path='/signup' element={<Signup />} /> */}
-          <Route path="/dashboard/:id" element={<Dashboard />} />{" "}
-          {/* shows user dashboard */}
-          <Route path="/dashboard/:id/create" element={<CreateGlass />} />
-          <Route path="/dashboard/:id/edit/:id" element={<EditGlass />} />
-          <Route path="/dashboard/:id/delete/:id" element={<DeleteGlass />} />
-          <Route path="/products/:id" element={<ShowGlass />} />
+          <Route path="/dashboard/:vendorId" element={<Dashboard />} />
+          <Route path="/dashboard/:vendorId/create" element={<CreateGlass />} />
+          <Route path="/dashboard/:vendorId/edit/:productId" element={<EditGlass />} />
+          <Route path="/dashboard/:vendorId/delete/:productId" element={<DeleteGlass />} />
+          <Route path="/products/:productId" element={<ShowGlass />} />
         </Routes>
       </VendorProvider>
     </ShoppingCartProvider>
