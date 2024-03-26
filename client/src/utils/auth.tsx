@@ -1,3 +1,8 @@
+type SavedData = {
+  id: string;
+  token: string;
+};
+
 class Auth {
   //login user and store server auth token in localStorage
   login(id: string, token: string) {
@@ -14,11 +19,13 @@ class Auth {
   }
 
   // return token from localStorage
-  getSavedData() {
+  getSavedData(): SavedData | null {
     let id = localStorage.getItem("userId");
     let token = localStorage.getItem("loginToken");
-    if (!id || !token) return window.location.assign("/login");
-    else return { id, token };
+    if (!id || !token) {
+    //  window.location.assign("/login");
+      return null;
+    } else return { id, token };
   }
 }
 

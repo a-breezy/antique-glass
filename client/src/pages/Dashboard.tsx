@@ -1,15 +1,10 @@
-import { useState, useEffect } from "react";
-import Spinner from "../components/Utils/Spinner";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 import ProductTable from "../components/Dashboard/ProductTable";
 import { useVendor } from "../context/VendorContext";
 
 export default function Dashboard() {
-  const [loading, setLoading] = useState(false);
   const { products } = useVendor();
-
-  console.log(products);
 
   return (
     <div className="p-4">
@@ -23,7 +18,7 @@ export default function Dashboard() {
         </Link>
       </div>
 
-      {loading ? <Spinner /> : <ProductTable products={products} />}
+      <ProductTable products={products} />
     </div>
   );
 }

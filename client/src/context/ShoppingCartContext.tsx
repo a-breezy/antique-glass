@@ -8,7 +8,8 @@ import {
 import axios from "axios";
 
 //! remove after testing
-import sampleGlasses from "../../public/assets/sampleGlasses.json";
+// import sampleGlasses from "../../public/assets/sampleGlasses.json";
+
 import useLocalStorage from "../hooks/useLocalStorage";
 
 type ShoppingCartProviderProps = {
@@ -61,17 +62,15 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   // fetch data and set to storeItems
   useEffect(() => {
     try {
-      //! uncomment when going live
-      // const res = await axios.get("http:localhost:5555/products");
-      // if (res) {
-      //   setGlasses(res.data.data);
-      // }
-      //! remove when live
-      setStoreItems(sampleGlasses);
+      axios
+        .get("http://localhost:5555/products")
+        .then((res) => setStoreItems(res.data.data));
     } catch (error: unknown) {
       console.log(error);
     }
   }, []);
+
+
 
   const cartQuantity = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,

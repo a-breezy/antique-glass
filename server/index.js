@@ -3,7 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
-import {authToken} from "./utils/auth.js";
+import { authToken } from "./utils/auth.js";
 
 import productRoutes from "./routes/productRoutes.js";
 import vendorRoutes from "./routes/vendorRoutes.js";
@@ -27,7 +27,7 @@ app.use("/login", loginRoutes);
 //! uncomment after testing to apply middleware to all routes
 // app.use("/vendor", authToken, vendorRoutes);
 app.use("/vendor", vendorRoutes);
-app.use("/product", productRoutes);
+app.use("/products", productRoutes);
 
 app.use((req, res) => {
   res.status(404).send("<h1>404 Error!</h1>");

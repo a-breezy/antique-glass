@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-// import axios from "axios";
 import { SingleGlass } from "../components/Home/SingleGlass";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 

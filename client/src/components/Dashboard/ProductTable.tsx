@@ -4,7 +4,22 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
 
-export default function ProductTable({ products }) {
+type Product = {
+  _id: number;
+  title: string;
+  description: string;
+  condition: string;
+  quantity: number;
+  price: number;
+  availability: boolean;
+  image: string;
+};
+
+type ProductTableProps = {
+  products: Product[];
+};
+
+export default function ProductTable({ products }: ProductTableProps) {
   return (
     <table className="w-full border-separate border-spacing-2">
       <thead>
