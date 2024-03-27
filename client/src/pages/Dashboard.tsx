@@ -13,7 +13,7 @@ export default function Dashboard() {
         <div>
           <h1 className="text-3x1 text-center my-8">Dashboard</h1>
         </div>
-        <Link to="/glass/create" className="flex flex-col justify-around">
+        <Link to={`/dashboard/${vendorId}/create`} className="flex flex-col justify-around">
           <MdOutlineAddBox className="text-sky-800 text-4x1" />
           <span>Create A New Product</span>
         </Link>

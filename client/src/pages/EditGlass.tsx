@@ -5,22 +5,22 @@ import axios from "axios";
 import ProductForm from "../components/ProductForm/ProductForm";
 
 export default function EditGlass() {
+  const { vendorId, productId } = useParams();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     condition: "good",
     quantity: 0,
     price: 0,
+    availability: true,
+    vendor: vendorId!,
     // offerPrice: null,
     // image: [],
-    availability: true,
   });
 
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const { vendorId, productId } = useParams();
 
-  // get data from be
   useEffect(() => {
     axios
       .get(`http://localhost:5555/products/${productId}`)
@@ -41,7 +41,7 @@ export default function EditGlass() {
         setMessage("Success, redirecting you to your dashboard");
         setTimeout(() => {
           navigate(`/dashboard/${vendorId}`);
-        }, 2000);
+        }, 4000);
       })
       .catch((error) => {
         setMessage("An error occurred. Please try again.");
@@ -57,8 +57,6 @@ export default function EditGlass() {
         message={message}
         handleSubmit={handleSubmit}
       />
-
-      {/* {message != "" ? <div>{message}</div> : null} */}
     </div>
   );
 }
