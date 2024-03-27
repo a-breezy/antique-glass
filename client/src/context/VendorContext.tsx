@@ -7,7 +7,7 @@ import {
 } from "react";
 import Auth from "../utils/auth";
 import axios from "axios";
-import { redirect, useParams, useNavigate } from "react-router-dom";
+import { redirect, useParams } from "react-router-dom";
 
 type VendorContext = {
   products: Product[];
@@ -40,9 +40,6 @@ export function useVendor() {
 
 export function VendorProvider({ children }: VendorProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
-//   const [message, setMessage] = useState("");
-
-  const navigate = useNavigate();
 
   // get data from backend and set products state
   useEffect(() => {
