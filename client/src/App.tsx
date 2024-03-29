@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 
-import CreateGlass from "./pages/CreateGlass";
-import DeleteGlass from "./pages/DeleteGlass";
+import CreateGlass from "./pages/CreateProduct";
+import DeleteGlass from "./pages/DeleteProduct";
 import EditGlass from "./pages/EditGlass";
-import ShowGlass from "./pages/ShowGlass";
+import ShowGlass from "./pages/ShowProduct";
 import Home from "./pages/Home";
 import NavBar from "./components/NavBar/NavBar";
 import About from "./pages/About";

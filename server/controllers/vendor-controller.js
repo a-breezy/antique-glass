@@ -2,6 +2,7 @@ import { Vendor } from "../models/Vendor.js";
 import bcrypt from "bcrypt";
 
 const vendorController = {
+  //! delete for production
   // get all vendors
   getAllVendors: async (req, res) => {
     try {
@@ -29,7 +30,9 @@ const vendorController = {
           select: "-__v",
         })
         .select("-__v");
-      if (!vendor) return res.status(404).json({ message: "Vendor not found" });
+      if (!vendor) {
+        return res.status(404).json({ message: "Vendor not found" });
+      }
       return res.status(200).json(vendor);
     } catch (err) {
       console.log(err.message);

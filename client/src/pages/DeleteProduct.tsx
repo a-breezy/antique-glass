@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function DeleteGlass() {
+export default function DeleteProduct() {
   const navigate = useNavigate();
   const { vendorId, productId } = useParams();
   const [message, setMessage] = useState("");

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductForm from "../components/ProductForm/ProductForm";
 
-export default function CreateGlass() {
+export default function CreateProduct() {
   const { vendorId } = useParams();
   const [formData, setFormData] = useState({
     title: "",

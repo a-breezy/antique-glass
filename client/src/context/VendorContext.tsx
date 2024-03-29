@@ -7,12 +7,12 @@ import {
 } from "react";
 import Auth from "../utils/auth";
 import axios from "axios";
-import { redirect, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 type VendorContext = {
   products: Product[];
-//   message: string;
-//   deleteProduct: (vendorId: string, productId: string) => void;
+  //   message: string;
+  //   deleteProduct: (vendorId: string, productId: string) => void;
   editProduct: (id: number) => void;
   toggleAvailability: (id: number) => void;
 };
@@ -40,21 +40,29 @@ export function useVendor() {
 
 export function VendorProvider({ children }: VendorProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
+  const navigate = useNavigate();
 
-  // get data from backend and set products state
+  // set check to ensure that user is logged in.
+  // if not don't allow any of the other functions
+
   useEffect(() => {
     const data = Auth.getSavedData();
-    if (data == null) redirect("/login");
-    else {
+    if (data?.token == null && data?.refreshToken == null) {
+      navigate("/login");
+    } else {
       axios({
         url: `http://localhost:5555/vendor/${data.id}`,
         method: "get",
-        headers: { Authorization: `Bearer ${data.token}` },
+        headers: {
+          authorization: `Bearer ${data.token}`,
+          refreshToken: `Bearer ${data.refreshToken}`,
+        },
       })
         .then((res) => {
           setProducts(res.data.products);
         })
         .catch((error) => {
+          navigate("/login");
           console.log(error);
         });
     }
@@ -66,7 +74,6 @@ export function VendorProvider({ children }: VendorProviderProps) {
     // use axios to find and update item
     // return success to page
   }
-
 
   // change product availability from true to false
   function toggleAvailability(id: number) {

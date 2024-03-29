@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import BackButton from "../components/Utils/BackButton";
 import Spinner from "../components/Utils/Spinner";
 
-export default function ShowGlass() {
+export default function ShowProduct() {
   const [glass, setGlass] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
