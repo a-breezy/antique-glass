@@ -2,9 +2,18 @@ import { Link } from "react-router-dom";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import CartButton from "./CartButton";
+import { useVendor } from "../../context/VendorContext";
+import Auth from "../../utils/auth";
 
 export default function NavBar() {
   const { cartQuantity, isOpen } = useShoppingCart();
+  const { logIn, setLogIn } = useVendor();
+
+  console.log(logIn);
+  const handleLogout = () => {
+    setLogIn(false);
+    Auth.logout();
+  };
 
   return (
     <div className="flex justify-between flex-row flex-wrap lg:h-36 h-48 shadow-lg p-4 bg-slate-200">
@@ -22,6 +31,20 @@ export default function NavBar() {
         <Link to="/about">
           <h2 className="px-2">About</h2>
         </Link>
+        {logIn ? (
+          <h2 className="px-2" onClick={handleLogout}>
+            Logout
+          </h2>
+        ) : (
+          <>
+            <Link to="/login">
+              <h2 className="px-2">Login</h2>
+            </Link>
+            <Link to="/signup">
+              <h2 className="px-2">Sign Up</h2>
+            </Link>
+          </>
+        )}
       </div>
       <div className="flex flex-wrap content-center w-11">
         <CartButton />

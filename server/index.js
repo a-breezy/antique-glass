@@ -21,8 +21,6 @@ db.once("open", () => console.log("Connected to database"));
 app.use(express.json());
 app.use(cors());
 
-// app.get("/", res.send({ message: "correct" }));
-
 app.use("/login", loginRoutes);
 //! uncomment after testing to apply middleware to all routes
 // app.use("/vendor", authToken, vendorRoutes);

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import Auth from "../../utils/auth.js";
+import { useVendor } from "../../context/VendorContext.js";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
+  const { setLogIn } = useVendor();
 
   const handleChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -17,6 +19,7 @@ export default function Login() {
       const data = await axios.post("http://localhost:5555/login", credentials);
       if (data != null) {
         setMessage("Login successful, sending you to your dashboard...");
+        setLogIn(true);
         setTimeout(() => {
           Auth.login(data.data.id, data.data.token, data.data.refreshToken);
         }, 3000);

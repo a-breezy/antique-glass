@@ -11,6 +11,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 type VendorContext = {
   products: Product[];
+  logIn: boolean;
+  setLogIn: (arg: boolean) => void;
   //   message: string;
   //   deleteProduct: (vendorId: string, productId: string) => void;
   editProduct: (id: number) => void;
@@ -40,6 +42,7 @@ export function useVendor() {
 
 export function VendorProvider({ children }: VendorProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
+  const [logIn, setLogIn] = useState();
   const navigate = useNavigate();
 
   // set check to ensure that user is logged in.
@@ -84,12 +87,13 @@ export function VendorProvider({ children }: VendorProviderProps) {
   return (
     <VendorContext.Provider
       value={{
-        // add export functions here
         products,
         // message,
+        logIn,
+        setLogIn,
         editProduct,
-        // deleteProduct,
         toggleAvailability,
+        // deleteProduct,
       }}
     >
       {children}

@@ -9,8 +9,10 @@ import NavBar from "./components/NavBar/NavBar";
 import About from "./pages/About";
 import Store from "./pages/Store";
 import Dashboard from "./pages/Dashboard";
-import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import Login from "./components/Login/Login";
+import Signup from "./pages/Signup";
+
+import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import { VendorProvider } from "./context/VendorContext";
 
 export default function App() {
@@ -24,11 +26,17 @@ export default function App() {
           <Route path="/store" element={<Store />} />
           {/* create login and signup */}
           <Route path="/login" element={<Login />} />
-          {/* <Route path='/signup' element={<Signup />} /> */}
+          <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard/:vendorId" element={<Dashboard />} />
           <Route path="/dashboard/:vendorId/create" element={<CreateGlass />} />
-          <Route path="/dashboard/:vendorId/edit/:productId" element={<EditGlass />} />
-          <Route path="/dashboard/:vendorId/delete/:productId" element={<DeleteGlass />} />
+          <Route
+            path="/dashboard/:vendorId/edit/:productId"
+            element={<EditGlass />}
+          />
+          <Route
+            path="/dashboard/:vendorId/delete/:productId"
+            element={<DeleteGlass />}
+          />
           <Route path="/products/:productId" element={<ShowGlass />} />
         </Routes>
       </VendorProvider>
