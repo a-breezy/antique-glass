@@ -7,16 +7,13 @@ import {
 } from "react";
 import Auth from "../utils/auth";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type VendorContext = {
   products: Product[];
   logIn: boolean;
   setLogIn: (arg: boolean) => void;
   //   message: string;
-  //   deleteProduct: (vendorId: string, productId: string) => void;
-  editProduct: (id: number) => void;
-  toggleAvailability: (id: number) => void;
 };
 
 type Product = {
@@ -42,7 +39,7 @@ export function useVendor() {
 
 export function VendorProvider({ children }: VendorProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
-  const [logIn, setLogIn] = useState();
+  const [logIn, setLogIn] = useState<boolean>(false);
   const navigate = useNavigate();
 
   // set check to ensure that user is logged in.
@@ -51,6 +48,7 @@ export function VendorProvider({ children }: VendorProviderProps) {
   useEffect(() => {
     const data = Auth.getSavedData();
     if (data?.token == null && data?.refreshToken == null) {
+      setLogIn(false);
       navigate("/login");
     } else {
       axios({
@@ -62,6 +60,7 @@ export function VendorProvider({ children }: VendorProviderProps) {
         },
       })
         .then((res) => {
+          setLogIn(true);
           setProducts(res.data.products);
         })
         .catch((error) => {
@@ -71,29 +70,13 @@ export function VendorProvider({ children }: VendorProviderProps) {
     }
   }, []);
 
-  // edit item from vendor
-  function editProduct(id: number) {
-    // use params to get product id
-    // use axios to find and update item
-    // return success to page
-  }
-
-  // change product availability from true to false
-  function toggleAvailability(id: number) {
-    // axios call to find product by id and update
-    // set availability to opposite of what it currently is
-  }
-
   return (
     <VendorContext.Provider
       value={{
         products,
         // message,
         logIn,
-        setLogIn,
-        editProduct,
-        toggleAvailability,
-        // deleteProduct,
+        setLogIn
       }}
     >
       {children}

@@ -9,7 +9,6 @@ export default function NavBar() {
   const { cartQuantity, isOpen } = useShoppingCart();
   const { logIn, setLogIn } = useVendor();
 
-  console.log(logIn);
   const handleLogout = () => {
     setLogIn(false);
     Auth.logout();
@@ -32,7 +31,7 @@ export default function NavBar() {
           <h2 className="px-2">About</h2>
         </Link>
         {logIn ? (
-          <h2 className="px-2" onClick={handleLogout}>
+          <h2 className="px-2 cursor-pointer" onClick={handleLogout}>
             Logout
           </h2>
         ) : (
