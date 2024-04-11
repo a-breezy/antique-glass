@@ -23,7 +23,7 @@ const productController = {
       return res.status(200).json(product);
     } catch (err) {
       console.log(err.message);
-      res.status(500).json({ message: error.message });
+      res.status(500).json({ message: err.message });
     }
   },
 
@@ -44,7 +44,7 @@ const productController = {
       try {
         const newProduct = await Product.create({
           ...req.body,
-          images: req.files.map((file) => file.path),
+          productImage: req.file.path,
         }).then((_id) => {
           return Vendor.findOneAndUpdate(
             { _id: req.body.vendor },
@@ -54,7 +54,6 @@ const productController = {
         });
         return res.status(201).json(newProduct);
       } catch (err) {
-        console.log("here", err.message);
         res.status(500).json({ message: err.message });
       }
     }

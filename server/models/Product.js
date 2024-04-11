@@ -31,13 +31,9 @@ const productSchema = mongoose.Schema(
       type: Boolean,
       required: true,
     },
-    images:
-      //! create an array after tested and accurate
-      [
-        {
-          type: String,
-        },
-      ],
+    productImage: {
+      type: String,
+    },
   },
   {
     timestamps: true,

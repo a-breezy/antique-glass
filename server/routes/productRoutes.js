@@ -16,11 +16,17 @@ const router = express.Router();
 router
   .route("/")
   .get(getAllProducts)
-  .post(upload.array("productImages"), createProduct);
+  .post(upload.single("productImage"), createProduct);
+  // .post(upload.single("productImages"), (req, res) => {
+  //   console.log("here")
+  //   console.log(req.body)
+  //   console.log(req.file)
+  // });
 
 router
   .route("/:productId")
   .get(getProductById)
+  //! update put route if change to product images
   .put(upload.array("productImages"), updateProduct)
   .delete(deleteProduct);
 

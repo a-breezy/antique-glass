@@ -9,7 +9,7 @@ type FormData = {
   price: number;
   vendor: string;
   availability: boolean;
-  images: FileList | null;
+  productImage: File | null;
 };
 
 type FormDataProps = {
@@ -47,7 +47,7 @@ export default function ProductForm({
   };
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, images: e.target.files });
+    setFormData({ ...formData, productImage: e.target.files?.[0] || null });
   };
 
   return (
@@ -154,9 +154,8 @@ export default function ProductForm({
             Images
             <input
               type="file"
-              // accept=".png, .jpg, .jpeg"
-              name="productImages"
-              // multiple
+              accept=".png, .jpg, .jpeg"
+              name="productImage"
               onChange={handleImage}
             />
           </div>

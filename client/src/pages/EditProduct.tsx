@@ -14,7 +14,7 @@ export default function EditProduct() {
     price: 0,
     availability: true,
     vendor: vendorId!,
-    image: null as FileList | null,
+    image: null as File | null,
   });
 
   const [message, setMessage] = useState("");

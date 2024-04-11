@@ -12,7 +12,7 @@ export default function CreateProduct() {
     quantity: 0,
     price: 0,
     availability: true,
-    images: null as FileList | null,
+    productImage: null as File | null,
     vendor: vendorId!,
   });
 
@@ -21,35 +21,19 @@ export default function CreateProduct() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //* check that data is actually getting to db
-    // console.log(formData);
 
-    const sendData = new FormData();
-    sendData.append("title", "formData.title");
-    sendData.append("description", formData.description);
-    sendData.append("condition", formData.condition);
-    // sendData.append("quantity", formData.quantity);
-    // sendData.append("price", formData.price);
-    // sendData.append("availability", formData.availability);
-    // sendData.append("images", formData.images);
-    // sendData.append("vendor", formData.vendor);
-
-    console.log(sendData.keys());
-
-    console.log(formData.images);
     axios
-      .post("http://localhost:5555/products/", sendData, {
+      .postForm("http://localhost:5555/products/", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
-      .then((res) => {
-        // console.log(res.data);
-        // setMessage("Success, redirecting you to your dashboard");
-        // setTimeout(() => {
-        //   navigate(`/dashboard/${vendorId}`);
-        // }, 4000);
+      .then(() => {
+        setMessage("Success, redirecting you to your dashboard");
+        setTimeout(() => {
+          navigate(`/dashboard/${vendorId}`);
+        }, 4000);
       })
       .catch((error) => {
-        // setMessage("An error has occurred please try again")
+        setMessage("An error has occurred please try again")
         console.log(error);
       });
   };
