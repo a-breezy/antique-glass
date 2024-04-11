@@ -28,42 +28,36 @@ const productController = {
   },
 
   createProduct: async (req, res) => {
-    // console.log(req.body)
-    console.log(req.file);
-    console.log(req.body);
-    // if (
-    //   !body.title ||
-    //   !body.vendor ||
-    //   !body.description ||
-    //   !body.condition ||
-    //   !body.quantity ||
-    //   !body.price ||
-    //   !body.availability
-    // ) {
-    //   return res.status(400).json({
-    //     message:
-    //       "Send all required fields",
-    //   });
-    // } else {
-    try {
-      const newProduct = await Product.create({
-        ...req.body,
-        images: req.files.map(file => file.path),
+    if (
+      !req.body.title ||
+      !req.body.vendor ||
+      !req.body.description ||
+      !req.body.condition ||
+      !req.body.quantity ||
+      !req.body.price ||
+      !req.body.availability
+    ) {
+      return res.status(400).json({
+        message: "Missing required fields",
       });
-      // .then((_id) => {
-      //   return Vendor.findOneAndUpdate(
-      //     { _id: req.body.vendor },
-      //     { $push: { products: _id } },
-      //     { new: true }
-      //   );
-      // });
-      console.log();
-      return res.status(201).json(newProduct);
-    } catch (err) {
-      console.log("here", err.message);
-      res.status(500).json({ message: err.message });
+    } else {
+      try {
+        const newProduct = await Product.create({
+          ...req.body,
+          images: req.files.map((file) => file.path),
+        }).then((_id) => {
+          return Vendor.findOneAndUpdate(
+            { _id: req.body.vendor },
+            { $push: { products: _id } },
+            { new: true }
+          );
+        });
+        return res.status(201).json(newProduct);
+      } catch (err) {
+        console.log("here", err.message);
+        res.status(500).json({ message: err.message });
+      }
     }
-    // }
   },
 
   updateProduct: async ({ params, body }, res) => {
