@@ -13,13 +13,13 @@ import loginRoutes from "./routes/loginRoutes.js";
 const app = express();
 
 mongoose.connect(`mongodb://127.0.0.1:27017/Unique-wares`);
-// mongoose.set('debug', true);
+
 const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("Connected to database"));
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.use("/login", loginRoutes);
 //! uncomment after testing to apply middleware to all routes
@@ -34,11 +34,3 @@ app.use((req, res) => {
 app.listen(process.env.PORT, () =>
   console.log(`Listening on port ${process.env.PORT}`)
 );
-//   .then(() => {
-//     app.listen(process.env.PORT, () => {
-//       console.log(`App is listening on port: ${process.env.PORT}`);
-//     });
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });

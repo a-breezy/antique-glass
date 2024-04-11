@@ -27,20 +27,19 @@ const productSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    // set price minimum price that item can sell for
-    offerPrice: {
-      type: Number,
-    },
     availability: {
       type: Boolean,
       required: true,
     },
-    // images: [{
-    //   type: Array,
-    // }],
-    image: {
-      type: String,
-    },
+    images:
+      //! create an array after tested and accurate
+      [
+        {
+          type: String,
+          // size: Number,
+          // type: String
+        },
+      ],
   },
   {
     timestamps: true,

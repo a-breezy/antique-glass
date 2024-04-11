@@ -1,19 +1,20 @@
 import { Routes, Route } from "react-router-dom";
 
-import CreateGlass from "./pages/CreateProduct";
-import DeleteGlass from "./pages/DeleteProduct";
-import EditGlass from "./pages/EditGlass";
-import ShowGlass from "./pages/ShowProduct";
 import Home from "./pages/Home";
 import NavBar from "./components/NavBar/NavBar";
 import About from "./pages/About";
 import Store from "./pages/Store";
-import Dashboard from "./pages/Dashboard";
-import Login from "./components/Login/Login";
 import Signup from "./pages/Signup";
+import Login from "./components/Login/Login";
+import Dashboard from "./pages/Dashboard";
+import CreateProduct from "./pages/CreateProduct";
+import DeleteProduct from "./pages/DeleteProduct";
+import EditProduct from "./pages/EditProduct";
+import ShowProduct from "./pages/ShowProduct";
 
 import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import { VendorProvider } from "./context/VendorContext";
+
 
 export default function App() {
   return (
@@ -24,20 +25,19 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/store" element={<Store />} />
-          {/* create login and signup */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard/:vendorId" element={<Dashboard />} />
-          <Route path="/dashboard/:vendorId/create" element={<CreateGlass />} />
+          <Route path="/dashboard/:vendorId/create" element={<CreateProduct />} />
           <Route
             path="/dashboard/:vendorId/edit/:productId"
-            element={<EditGlass />}
+            element={<EditProduct />}
           />
           <Route
             path="/dashboard/:vendorId/delete/:productId"
-            element={<DeleteGlass />}
+            element={<DeleteProduct />}
           />
-          <Route path="/products/:productId" element={<ShowGlass />} />
+          <Route path="/products/:productId" element={<ShowProduct />} />
         </Routes>
       </VendorProvider>
     </ShoppingCartProvider>

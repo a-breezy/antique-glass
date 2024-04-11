@@ -9,15 +9,14 @@ type FormData = {
   price: number;
   vendor: string;
   availability: boolean;
-  // offerPrice: number | null;
-  // image: []
+  images: FileList | null;
 };
 
 type FormDataProps = {
   formData: FormData;
   setFormData: Dispatch<SetStateAction<FormData>>;
   message: string;
-  handleSubmit: () => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
 export default function ProductForm({
@@ -34,7 +33,7 @@ export default function ProductForm({
   ) => {
     const target = e.target as HTMLInputElement | HTMLTextAreaElement;
     let value = target.value;
-    console.log(parseInt(value));
+
     if (target.id == "quantity" || target.id == "price") {
       let intVal = parseInt(value);
       setFormData({ ...formData, [target.id]: intVal });
@@ -47,11 +46,20 @@ export default function ProductForm({
     setFormData({ ...formData, availability: isAvailable });
   };
 
+  const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, images: e.target.files });
+  };
+
   return (
     <div className="p-4">
       <h1 className="text-xl my-4 flex place-content-center">Edit Glass</h1>
       {message == "" ? (
-        <div className="flex flex-col border-2 border-sky-400 rounded-xl p-4 mx-auto w-5/6 lg:w-2/3">
+        <form
+          className="flex flex-col border-2 border-sky-400 rounded-xl p-4 mx-auto w-5/6 lg:w-2/3"
+          method="post"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
+        >
           <div className="my-4">
             <label className="text-xl mr-4 text-gray-500">Title</label>
             <input
@@ -109,19 +117,6 @@ export default function ProductForm({
               className="border-2 border-gray-500 px-4 py-2 w-full"
             />
           </div>
-          {/* add later to allow users to set max offer price */}
-          {/* <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">
-            Make an Offer Price (Set minimum price you will take for the item)
-          </label>
-          <input
-            type="number"
-            id="offerPrice"
-            value={formData.offerPrice}
-            onChange={handleChange}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div> */}
           <div className="my-4 flex items-center justify-around">
             <div>
               <label className="text-l mr-4 text-gray-500" htmlFor="available">
@@ -155,10 +150,20 @@ export default function ProductForm({
               />
             </div>
           </div>
-          <button className="p-2 bg-sky-300 m-8" onClick={handleSubmit}>
+          <div className="my-4 flex items-center justify-around">
+            Images
+            <input
+              type="file"
+              // accept=".png, .jpg, .jpeg"
+              name="productImages"
+              // multiple
+              onChange={handleImage}
+            />
+          </div>
+          <button className="p-2 bg-sky-300 m-8" type="submit">
             Save
           </button>
-        </div>
+        </form>
       ) : (
         <div className="flex flex-col items-center border-2 border-sky-400 rounded-xl p-8 mx-auto w-5/6 lg:w-2/3">
           {message}

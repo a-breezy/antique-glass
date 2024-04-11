@@ -4,7 +4,7 @@ import axios from "axios";
 
 import ProductForm from "../components/ProductForm/ProductForm";
 
-export default function EditGlass() {
+export default function EditProduct() {
   const { vendorId, productId } = useParams();
   const [formData, setFormData] = useState({
     title: "",
@@ -14,8 +14,7 @@ export default function EditGlass() {
     price: 0,
     availability: true,
     vendor: vendorId!,
-    // offerPrice: null,
-    // image: [],
+    image: null as FileList | null,
   });
 
   const [message, setMessage] = useState("");
