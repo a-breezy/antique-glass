@@ -1,6 +1,19 @@
 import { Product } from "../models/Product.js";
 import { Vendor } from "../models/Vendor.js";
 
+const checkFields = (body) => {
+  if (
+    !body.title ||
+    !body.vendor ||
+    !body.description ||
+    !body.condition ||
+    !body.quantity ||
+    !body.price ||
+    !body.availability
+  )
+    return false;
+};
+
 const productController = {
   getAllProducts: async (req, res) => {
     try {
@@ -59,24 +72,32 @@ const productController = {
     }
   },
 
-  updateProduct: async ({ params, body }, res) => {
-    try {
-      const product = await Product.findOneAndUpdate(
-        { _id: params.productId },
-        body,
-        {
-          new: true,
-        }
-      );
-      if (!product)
-        return res
-          .status(404)
-          .json({ message: "Product not found" })
-          .then(() => {});
-      return res.status(200).json({ message: "Product updated" });
-    } catch (err) {
-      console.log(err.message);
-      res.status(500).json({ message: err.message });
+  updateProduct: async ({params, body, file}, res) => {
+    if (checkFields(body) == false) {
+      // console.log("updateProducts checkFields ", checkFields(body));
+      return res.status(400).json({
+        message: "Missing required fields",
+      });
+    } else {
+      try {
+        const product = await Product.findOneAndUpdate(
+          { _id: params.productId },
+          { ...body, productImage: file.path },
+          {
+            new: true,
+          }
+        );
+        if (!product)
+          return res
+            .status(404)
+            .json({ message: "Product not found" })
+            .then(() => {});
+        return res.status(200).json({ message: "Product updated" });
+      } catch (err) {
+        // console.log(err);
+        console.log(err.message);
+        res.status(500).json({ message: err.message });
+      }
     }
   },
 

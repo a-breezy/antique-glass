@@ -13,8 +13,8 @@ export default function EditProduct() {
     quantity: 0,
     price: 0,
     availability: true,
+    productImage: null as File | null,
     vendor: vendorId!,
-    image: null as File | null,
   });
 
   const [message, setMessage] = useState("");
@@ -25,6 +25,7 @@ export default function EditProduct() {
       .get(`http://localhost:5555/products/${productId}`)
       .then((res) => {
         const data = res.data;
+        console.log(data.productImage);
         if (data) setFormData(data);
       })
       .catch((error) => {
@@ -33,9 +34,12 @@ export default function EditProduct() {
       });
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     axios
-      .put(`http://localhost:5555/products/${productId}`, formData)
+      .putForm(`http://localhost:5555/products/${productId}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       .then(() => {
         setMessage("Success, redirecting you to your dashboard");
         setTimeout(() => {

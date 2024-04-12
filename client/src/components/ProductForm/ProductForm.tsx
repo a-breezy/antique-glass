@@ -156,6 +156,8 @@ export default function ProductForm({
               type="file"
               accept=".png, .jpg, .jpeg"
               name="productImage"
+              //! have to search how to deal with image files in react
+              // value={formData.productImage}
               onChange={handleImage}
             />
           </div>

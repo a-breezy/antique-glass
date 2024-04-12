@@ -5,6 +5,8 @@ import ProductForm from "../components/ProductForm/ProductForm";
 
 export default function CreateProduct() {
   const { vendorId } = useParams();
+  const navigate = useNavigate();
+  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -15,9 +17,6 @@ export default function CreateProduct() {
     productImage: null as File | null,
     vendor: vendorId!,
   });
-
-  const [message, setMessage] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,7 +32,7 @@ export default function CreateProduct() {
         }, 4000);
       })
       .catch((error) => {
-        setMessage("An error has occurred please try again")
+        setMessage("An error has occurred please try again");
         console.log(error);
       });
   };
