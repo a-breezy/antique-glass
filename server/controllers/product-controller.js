@@ -112,7 +112,7 @@ const productController = {
 
       return res.status(200).json(newProduct);
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
       res.status(500).json({ message: err.message });
     }
   },
@@ -137,7 +137,7 @@ const productController = {
       if (!vendor) return res.status(404).json({ message: "Vendor not found" });
       return res.status(200).json({ message: "Product successfully deleted" });
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
       res.status(500).json({ message: err.message });
     }
   },

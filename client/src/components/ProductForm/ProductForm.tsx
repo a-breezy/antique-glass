@@ -49,17 +49,7 @@ export default function ProductForm({
   };
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
-    setFileToBase(e.target.files?.[0])
-    // setFormData({ ...formData, productImage: e.target.files?.[0] || null });
-  };
-
-  const setFileToBase = (file: any) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    console.log(reader);
-    reader.onloadend = () => {
-      setFormData({ ...formData, productImage: reader.result });
-    };
+    setFormData({ ...formData, productImage: e.target.files?.[0] || null });
   };
 
   return (

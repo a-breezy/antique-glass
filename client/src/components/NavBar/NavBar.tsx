@@ -9,6 +9,8 @@ export default function NavBar() {
   const { cartQuantity, isOpen } = useShoppingCart();
   const { logIn, setLogIn } = useVendor();
 
+  //! must get vendor id from vendor context if vendor is logged in
+  
   const handleLogout = () => {
     setLogIn(false);
     Auth.logout();
