@@ -1,11 +1,7 @@
 import { Product } from "../models/Product.js";
 import { Vendor } from "../models/Vendor.js";
 
-import {
-  handleImageUpload,
-  handleImageUpdate,
-  handleImageDelete,
-} from "../utils/fileUpload.js";
+import { handleImageUpload, handleImageDelete } from "../utils/fileUpload.js";
 
 const checkFields = (body) => {
   if (
@@ -90,28 +86,31 @@ const productController = {
       });
     }
     try {
-      const dataURI = getBase64(file);
-
-      // check if the updated product has a new image
-        // if so update image and delete old image
-        // else update body but keep image 
-        
-      const product = await Product.findOneAndUpdate(
-        { _id: params.productId },
-        {
-          ...body,
-          productImage: {
-            public_id: uploadFile.public_id,
-            url: uploadFile.secure_url,
-          },
-        },
-        {
-          new: true,
-        }
-      );
+      const product = await Product.findById(params.productId);
       if (!product)
         return res.status(404).json({ message: "Product not found" });
-      return res.status(200).json({ message: "Product updated" });
+
+      let data = body;
+      if (file) {
+        let oldId = product.productImage.public_id;
+        if (oldId) await handleImageDelete(oldId);
+
+        let dataURI = getBase64(file);
+        let newUpload = await handleImageUpload(dataURI, body.vendor);
+
+        data.productImage = {
+          public_id: newUpload.public_id,
+          url: newUpload.secure_url,
+        };
+      }
+
+      const newProduct = await Product.findOneAndUpdate(
+        { _id: params.productId },
+        data,
+        { new: true }
+      );
+
+      return res.status(200).json(newProduct);
     } catch (err) {
       console.log(err.message);
       res.status(500).json({ message: err.message });
@@ -120,14 +119,14 @@ const productController = {
 
   deleteProduct: async ({ params }, res) => {
     try {
-      const product = await Product.findByIdAndDelete(params.productId)
+      const product = await Product.findByIdAndDelete(params.productId);
 
       if (!product)
         return res.status(404).json({ message: "Product not found" });
 
       let public_id = product.productImage.public_id;
-      if (public_id) handleImageDelete(public_id)
-      
+      if (public_id) handleImageDelete(public_id);
+
       let vendorId = product.vendor;
       const vendor = await Vendor.findByIdAndUpdate(
         vendorId,

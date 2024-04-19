@@ -30,21 +30,9 @@ export async function handleImageUpload(file, vendorId) {
   return res;
 }
 
-//? create function to update image
-export async function handleImageUpdate(public_id, file) {
-  const res = await cloudinary.uploader.add_context
-    .destroy(public_id)
-    .then((result) => {
-      console.log(result);
-    });
-}
-
-//? create function to delete image
 export async function handleImageDelete(public_id) {
   try {
-    const res = await cloudinary.uploader
-      .destroy(public_id)
-      // .then((result) => console.log(result));
+    const res = await cloudinary.uploader.destroy(public_id);
     return res;
   } catch (err) {
     console.log(err);
