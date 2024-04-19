@@ -31,9 +31,14 @@ export default function NavBar() {
           <h2 className="px-2">About</h2>
         </Link>
         {logIn ? (
-          <h2 className="px-2 cursor-pointer" onClick={handleLogout}>
-            Logout
-          </h2>
+          <>
+            <Link to="/dashboard">
+              <h2 className="px-2">Dashboard</h2>
+            </Link>
+            <h2 className="px-2 cursor-pointer" onClick={handleLogout}>
+              Logout
+            </h2>
+          </>
         ) : (
           <>
             <Link to="/login">

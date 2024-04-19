@@ -9,7 +9,9 @@ type FormData = {
   price: number;
   vendor: string;
   availability: boolean;
-  productImage: File | null;
+  // ! change when finished testing
+  productImage: any;
+  // productImage: File | null;
 };
 
 type FormDataProps = {
@@ -47,7 +49,17 @@ export default function ProductForm({
   };
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, productImage: e.target.files?.[0] || null });
+    setFileToBase(e.target.files?.[0])
+    // setFormData({ ...formData, productImage: e.target.files?.[0] || null });
+  };
+
+  const setFileToBase = (file: any) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    console.log(reader);
+    reader.onloadend = () => {
+      setFormData({ ...formData, productImage: reader.result });
+    };
   };
 
   return (
