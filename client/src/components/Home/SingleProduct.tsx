@@ -5,8 +5,13 @@ import { BiShow } from "react-icons/bi";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { useState } from "react";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
-import GlassModal from "./GlassModal";
+import Modal from "./Modal";
 import QuantityButton from "../Utils/QuantityButton";
+
+type ProductImage = {
+  public_id: string;
+  url: string;
+};
 
 type Item = {
   _id: number;
@@ -16,14 +21,10 @@ type Item = {
   quantity: number;
   price: number;
   availability: boolean;
-  image: string;
+  productImage?: ProductImage;
 };
 
-type SingleGlassProps = {
-  item: Item;
-};
-
-export const SingleGlass = ({ item }: SingleGlassProps) => {
+export const SingleProduct = ({ item }: { item: Item }) => {
   const [showModal, setShowModal] = useState(false);
 
   const checkPlural = (item: string) => {
@@ -33,11 +34,8 @@ export const SingleGlass = ({ item }: SingleGlassProps) => {
     return item;
   };
 
-  const {
-    getItemQuantity,
-    increaseCartQuantity,
-    removeFromCart,
-  } = useShoppingCart();
+  const { getItemQuantity, increaseCartQuantity, removeFromCart } =
+    useShoppingCart();
 
   const cartQuantity = getItemQuantity(item._id);
 
@@ -47,11 +45,13 @@ export const SingleGlass = ({ item }: SingleGlassProps) => {
       className="border-2 border-gray-500 rounded-lg px-4 m-4 relative hover:shadow-xl"
     >
       <div className="p-2 mt-4 border-2 border-gray-300 rounded h-44 flex place-content-center">
-        <img
-          src={item.image}
-          alt={`${item.title} item for sale`}
-          className="h-full"
-        />
+        {item.productImage ? (
+          <img
+            src={item.productImage.url}
+            alt={`${item.title} item for sale`}
+            className="h-full"
+          />
+        ) : null}
       </div>
 
       <h2 className="px-4 py-1 rounded-lg">
@@ -100,13 +100,11 @@ export const SingleGlass = ({ item }: SingleGlassProps) => {
 
         {/* link to item page */}
         {/* must change backend to reflect item naming, not glass naming */}
-        <Link to={`/glass/details/${item._id}`}>
+        <Link to={`/product/details/${item._id}`}>
           <BsInfoCircle className="text-2x1 text-green-800" />
         </Link>
       </div>
-      {showModal && (
-        <GlassModal item={item} onClose={() => setShowModal(false)} />
-      )}
+      {showModal && <Modal item={item} onClose={() => setShowModal(false)} />}
     </div>
   );
 };

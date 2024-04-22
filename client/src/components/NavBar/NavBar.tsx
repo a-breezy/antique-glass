@@ -10,7 +10,7 @@ export default function NavBar() {
   const { logIn, setLogIn } = useVendor();
 
   //! must get vendor id from vendor context if vendor is logged in
-  
+  const vendorId = localStorage.getItem("userId");
   const handleLogout = () => {
     setLogIn(false);
     Auth.logout();
@@ -24,7 +24,7 @@ export default function NavBar() {
           <h2 className="text-xl">Your Place for Unique Glassware</h2>
         </Link>
       </div>
-      {/* add buttons for various pages */}
+
       <div className="flex flex-row w-1/3 lg:justify-around justify-center items-center">
         <Link to="/store">
           <h2 className="px-2">Store</h2>
@@ -34,7 +34,7 @@ export default function NavBar() {
         </Link>
         {logIn ? (
           <>
-            <Link to="/dashboard">
+            <Link to={`/dashboard/${vendorId}`}>
               <h2 className="px-2">Dashboard</h2>
             </Link>
             <h2 className="px-2 cursor-pointer" onClick={handleLogout}>
