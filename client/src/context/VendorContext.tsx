@@ -16,6 +16,11 @@ type VendorContext = {
   //   message: string;
 };
 
+type ProductImage = {
+  public_id: string;
+  url: string;
+}
+
 type Product = {
   _id: number;
   title: string;
@@ -24,7 +29,7 @@ type Product = {
   quantity: number;
   price: number;
   availability: boolean;
-  image: string;
+  image?: ProductImage;
 };
 
 type VendorProviderProps = {

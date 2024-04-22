@@ -25,7 +25,7 @@ export default function NavBar() {
         </Link>
       </div>
 
-      <div className="flex flex-row w-1/3 lg:justify-around justify-center items-center">
+      <div className="flex flex-row lg:w-1/3 lg:justify-around justify-center items-center">
         <Link to="/store">
           <h2 className="px-2">Store</h2>
         </Link>
