@@ -13,7 +13,6 @@ type VendorContext = {
   products: Product[];
   logIn: boolean;
   setLogIn: (arg: boolean) => void;
-  //   message: string;
 };
 
 type ProductImage = {
@@ -47,14 +46,13 @@ export function VendorProvider({ children }: VendorProviderProps) {
   const [logIn, setLogIn] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  // set check to ensure that user is logged in.
-  // if not don't allow any of the other functions
+  // refactor code to check if user is logged in on dashboard, createProduct, updateProduct, deleteProduct
 
   useEffect(() => {
     const data = Auth.getSavedData();
     if (data?.token == null && data?.refreshToken == null) {
       setLogIn(false);
-      navigate("/login");
+      // navigate("/login");
     } else {
       axios({
         url: `http://localhost:5555/vendor/${data.id}`,
@@ -79,7 +77,6 @@ export function VendorProvider({ children }: VendorProviderProps) {
     <VendorContext.Provider
       value={{
         products,
-        // message,
         logIn,
         setLogIn
       }}

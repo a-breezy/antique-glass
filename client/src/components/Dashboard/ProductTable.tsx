@@ -4,6 +4,11 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
 
+type ProductImage = {
+  public_id: string;
+  url: string;
+};
+
 type Product = {
   _id: number;
   title: string;
@@ -12,7 +17,7 @@ type Product = {
   quantity: number;
   price: number;
   availability: boolean;
-  image: string;
+  productImage?: ProductImage;
 };
 
 type ProductTableProps = {

@@ -7,7 +7,7 @@ export default function DeleteProduct() {
   const { vendorId, productId } = useParams();
   const [message, setMessage] = useState("");
 
-  const handleDeleteGlass = () => {
+  const handleDeleteProduct = () => {
     axios
       .delete(`http://localhost:5555/products/${productId}`)
       .then(() => {
@@ -22,28 +22,28 @@ export default function DeleteProduct() {
       });
   };
 
-  const handleNotDeleteGlass = () => {
+  const handleNotDeleteProduct = () => {
     navigate(`/dashboard/${vendorId}`);
   };
 
   return (
     <div className="p-4">
-      <h1 className="text-3x1 my-4 flex place-content-center">Delete Glass</h1>
+      <h1 className="text-3x1 my-4 flex place-content-center">Delete Product`</h1>
       {message == "" ? (
         <div className="flex flex-col items-center border-2 border-sky-400 rounded-xl p-8 mx-auto w-5/6 lg:w-2/3">
           <h3 className="text-2x1">
-            Are you sure you want to delete this glass?
+            Are you sure you want to delete this product?
           </h3>
 
           <button
             className="p-4 bg-red-600 text-white m-8 w-full rounded-lg hover:bg-red-700"
-            onClick={handleDeleteGlass}
+            onClick={handleDeleteProduct}
           >
             Yes, Delete It
           </button>
           <button
             className="p-4 bg-green-600 text-white m-8 w-full  rounded-lg hover:bg-green-700"
-            onClick={handleNotDeleteGlass}
+            onClick={handleNotDeleteProduct}
           >
             No, Keep It
           </button>

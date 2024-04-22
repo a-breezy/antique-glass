@@ -54,6 +54,7 @@ export default function EditProduct() {
 
   return (
     <div className="p-4">
+      <h1 className="text-xl my-4 flex place-content-center">Edit Product</h1>
       <ProductForm
         formData={formData}
         setFormData={setFormData}

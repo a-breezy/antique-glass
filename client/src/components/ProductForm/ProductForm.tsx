@@ -10,8 +10,8 @@ type FormData = {
   vendor: string;
   availability: boolean;
   // ! change when finished testing
-  productImage: any;
-  // productImage: File | null;
+  // productImage: any;
+  productImage: File | null;
 };
 
 type FormDataProps = {
@@ -54,7 +54,6 @@ export default function ProductForm({
 
   return (
     <div className="p-4">
-      <h1 className="text-xl my-4 flex place-content-center">Edit Glass</h1>
       {message == "" ? (
         <form
           className="flex flex-col border-2 border-sky-400 rounded-xl p-4 mx-auto w-5/6 lg:w-2/3"
