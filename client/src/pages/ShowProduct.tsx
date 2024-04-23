@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../components/Utils/BackButton";
+import { useVendor } from "../context/VendorContext";
 
 type ProductImage = {
   public_id: string;
@@ -22,8 +23,14 @@ type Product = {
 };
 
 export default function ShowProduct() {
+  const { logIn } = useVendor();
   const [product, setProduct] = useState<Product>();
   const { productId } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!logIn) navigate("/login");
+  }, []);
 
   useEffect(() => {
     axios
@@ -82,11 +89,15 @@ export default function ShowProduct() {
         </div>
         <div className="my-4 flex">
           <span className="text-x1 mr-8 text-gray-500">Image</span>
-          {product?.productImage ? (<img
+          {product?.productImage ? (
+            <img
               src={product.productImage.url}
               alt={`${product.title} item for sale`}
               className="h-2/3 w-2/3"
-            />) : (<span>No image included for this product</span>)}
+            />
+          ) : (
+            <span>No image included for this product</span>
+          )}
         </div>
       </div>
     </div>

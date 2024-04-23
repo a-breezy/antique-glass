@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { useVendor } from "../context/VendorContext";
 
 export default function DeleteProduct() {
   const navigate = useNavigate();
+  const { logIn } = useVendor();
   const { vendorId, productId } = useParams();
   const [message, setMessage] = useState("");
 
+  useEffect(() => {
+    if (!logIn) navigate("/login");
+  }, []);
   const handleDeleteProduct = () => {
     axios
       .delete(`http://localhost:5555/products/${productId}`)
@@ -28,7 +33,9 @@ export default function DeleteProduct() {
 
   return (
     <div className="p-4">
-      <h1 className="text-3x1 my-4 flex place-content-center">Delete Product`</h1>
+      <h1 className="text-3x1 my-4 flex place-content-center">
+        Delete Product`
+      </h1>
       {message == "" ? (
         <div className="flex flex-col items-center border-2 border-sky-400 rounded-xl p-8 mx-auto w-5/6 lg:w-2/3">
           <h3 className="text-2x1">

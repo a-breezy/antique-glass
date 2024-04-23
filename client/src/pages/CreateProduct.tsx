@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductForm from "../components/ProductForm/ProductForm";
+import { useVendor } from "../context/VendorContext";
 
 export default function CreateProduct() {
+  const { logIn } = useVendor();
   const { vendorId } = useParams();
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
@@ -17,6 +19,10 @@ export default function CreateProduct() {
     productImage: null as File | null,
     vendor: vendorId!,
   });
+
+  useEffect(() => {
+    if (!logIn) navigate("/login");
+  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

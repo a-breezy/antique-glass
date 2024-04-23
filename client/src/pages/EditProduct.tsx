@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-
+import { useVendor } from "../context/VendorContext";
 import ProductForm from "../components/ProductForm/ProductForm";
 
 export default function EditProduct() {
+  const navigate = useNavigate();
+  const { logIn } = useVendor();
   const { vendorId, productId } = useParams();
+  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -17,8 +20,9 @@ export default function EditProduct() {
     vendor: vendorId!,
   });
 
-  const [message, setMessage] = useState("");
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (!logIn) navigate("/login");
+  }, []);
 
   useEffect(() => {
     axios

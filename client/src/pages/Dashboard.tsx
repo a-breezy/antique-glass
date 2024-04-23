@@ -1,12 +1,17 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import ProductTable from "../components/Dashboard/ProductTable";
 import { useVendor } from "../context/VendorContext";
+import { useEffect } from "react";
 
 export default function Dashboard() {
-  const { products } = useVendor();
+  const { products, logIn } = useVendor();
   const { vendorId } = useParams();
+  const navigate = useNavigate();
 
-  console.log(products.length);
+  useEffect(() => {
+    if (!logIn) navigate("/login");
+  }, []);
+
   return (
     <div className="p-4">
       <div className="flex flex-wrap justify-between items-center">
