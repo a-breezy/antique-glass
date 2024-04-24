@@ -49,11 +49,14 @@ export function VendorProvider({ children }: VendorProviderProps) {
   // refactor code to check if user is logged in on dashboard, createProduct, updateProduct, deleteProduct
 
   useEffect(() => {
+    console.log("1 checking logIn in useEffect", logIn)
     const data = Auth.getSavedData();
     if (data?.token == null && data?.refreshToken == null) {
       setLogIn(false);
+      console.log("2 checking logIn in useEffect", logIn)
       // navigate("/login");
     } else {
+      console.log("3 checking logIn in useEffect", logIn)
       axios({
         url: `http://localhost:5555/vendor/${data.id}`,
         method: "get",

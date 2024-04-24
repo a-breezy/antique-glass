@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useVendor } from "../context/VendorContext";
+
+import BackButton from "../components/Utils/BackButton";
 import ProductForm from "../components/ProductForm/ProductForm";
 
 export default function EditProduct() {
@@ -29,7 +31,6 @@ export default function EditProduct() {
       .get(`http://localhost:5555/products/${productId}`)
       .then((res) => {
         const data = res.data;
-        console.log(data.productImage);
         if (data) setFormData(data);
       })
       .catch((error) => {
@@ -58,6 +59,7 @@ export default function EditProduct() {
 
   return (
     <div className="p-4">
+      <BackButton vendor={formData?.vendor || ""} />
       <h1 className="text-xl my-4 flex place-content-center">Edit Product</h1>
       <ProductForm
         formData={formData}
