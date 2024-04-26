@@ -7,10 +7,8 @@ import Auth from "../../utils/auth";
 
 export default function NavBar() {
   const { cartQuantity, isOpen } = useShoppingCart();
-  const { logIn, setLogIn } = useVendor();
+  const { logIn, setLogIn, vendor } = useVendor();
 
-  //! must get vendor id from vendor context if vendor is logged in
-  const vendorId = localStorage.getItem("userId");
   const handleLogout = () => {
     setLogIn(false);
     Auth.logout();
@@ -20,8 +18,8 @@ export default function NavBar() {
     <div className="flex justify-between flex-row flex-wrap lg:h-36 h-48 shadow-lg p-4 bg-slate-200">
       <div className="flex flex-col flex-wrap place-content-center text-center">
         <Link to="/">
-          <h1 className="text-3xl font-serif">Antique Glass</h1>
-          <h2 className="text-xl">Your Place for Unique Glassware</h2>
+          <h1 className="text-3xl font-serif">Unique Wares</h1>
+          <h2 className="text-xl">Your Place for Unique Pieces</h2>
         </Link>
       </div>
 
@@ -34,7 +32,7 @@ export default function NavBar() {
         </Link>
         {logIn ? (
           <>
-            <Link to={`/dashboard/${vendorId}`}>
+            <Link to={`/dashboard/${vendor}`}>
               <h2 className="px-2">Dashboard</h2>
             </Link>
             <h2 className="px-2 cursor-pointer" onClick={handleLogout}>
