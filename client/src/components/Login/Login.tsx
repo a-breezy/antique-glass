@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Auth from "../../utils/auth.js";
 import { useVendor } from "../../context/VendorContext.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
-  const { setLogIn } = useVendor();
+  const { logIn, setLogIn, vendor } = useVendor();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (logIn) navigate(`/dashboard/${vendor}`);
+  });
+  
   const handleChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
     setCredentials({ ...credentials, [name]: value });

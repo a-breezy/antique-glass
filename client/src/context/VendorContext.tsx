@@ -13,12 +13,13 @@ type VendorContext = {
   products: Product[];
   logIn: boolean;
   setLogIn: (arg: boolean) => void;
+  vendor: string;
 };
 
 type ProductImage = {
   public_id: string;
   url: string;
-}
+};
 
 type Product = {
   _id: number;
@@ -44,19 +45,16 @@ export function useVendor() {
 export function VendorProvider({ children }: VendorProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [logIn, setLogIn] = useState<boolean>(false);
+  const [vendor, setVendor] = useState<string>("");
   const navigate = useNavigate();
 
-  // refactor code to check if user is logged in on dashboard, createProduct, updateProduct, deleteProduct
-
   useEffect(() => {
-    console.log("1 checking logIn in useEffect", logIn)
     const data = Auth.getSavedData();
     if (data?.token == null && data?.refreshToken == null) {
       setLogIn(false);
-      console.log("2 checking logIn in useEffect", logIn)
       // navigate("/login");
     } else {
-      console.log("3 checking logIn in useEffect", logIn)
+      if (data.id) setVendor(data.id);
       axios({
         url: `http://localhost:5555/vendor/${data.id}`,
         method: "get",
@@ -70,8 +68,9 @@ export function VendorProvider({ children }: VendorProviderProps) {
           setProducts(res.data.products);
         })
         .catch((error) => {
-          navigate("/login");
+          console.log("in the catch error");
           console.log(error);
+          navigate("/login");
         });
     }
   }, []);
@@ -81,7 +80,8 @@ export function VendorProvider({ children }: VendorProviderProps) {
       value={{
         products,
         logIn,
-        setLogIn
+        setLogIn,
+        vendor,
       }}
     >
       {children}
