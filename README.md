@@ -28,20 +28,27 @@ Navigate to the client directory and install the dependencies with npm i.
 Run the client with ```npm run dev```, which runs on http://localhost:5173/ by default.
 
 ## Technologies
-Axios
-Bcrypt
-Cors
-Dotenv
-Express
-JSON Web Token
-MongoDB
-Mongoose
-Nodemon
-Notistack
-React
-React Dom
-React Icons
-React Router Dom
-Tailwind
-TypeScript
-Vite
+### Frontend
+- Axios
+- React
+- React Dom
+- React Icons
+- React Router Dom
+- Tailwind
+- TypeScript
+
+### Backend
+- Bcrypt
+- Cloudinary
+- Cors
+- Dotenv
+- Express
+- JSON Web Token
+- MongoDB
+- Mongoose
+- Multer
+- Nodemon
+- UUID
+
+## License
+[MIT](https://tldrlegal.com/license/mit-license)
