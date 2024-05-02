@@ -1,5 +1,4 @@
 import "dotenv/config";
-import { v4 as uuidv4 } from "uuid";
 import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 

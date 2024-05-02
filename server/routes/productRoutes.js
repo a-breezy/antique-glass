@@ -1,7 +1,7 @@
 import express from "express";
 import productController from "../controllers/product-controller.js";
 
-import { upload, handleImageUpload } from "../utils/fileUpload.js";
+import { upload } from "../utils/fileUpload.js";
 
 const {
   getAllProducts,

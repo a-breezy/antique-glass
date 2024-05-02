@@ -9,15 +9,15 @@ import productRoutes from "./routes/productRoutes.js";
 import vendorRoutes from "./routes/vendorRoutes.js";
 import loginRoutes from "./routes/loginRoutes.js";
 
-// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.8pi33kq.mongodb.net/?retryWrites=true&w=majority&appName=${process.env.DB_NAME}`;
 const app = express();
 
-mongoose.connect(`mongodb://127.0.0.1:27017/Unique-wares`);
-
-const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("Connected to database"));
-
+// connect to mongodb
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.8pi33kq.mongodb.net/?retryWrites=true&w=majority&appName=${process.env.DB_NAME}`;
+const db = mongoose
+  .connect(uri || `mongodb://127.0.0.1:27017/Unique-wares`)
+  .then(() => console.log("Connected to Database"))
+  .catch((error) => console.log(error));
+  
 app.use(cors());
 app.use(express.json());
 
