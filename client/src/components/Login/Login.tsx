@@ -22,7 +22,7 @@ export default function Login() {
   const handleFormSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     try {
-      const data = await axios.post("http://localhost:5555/login", credentials);
+      const data = await axios.post("http://192.168.1.124:8080/login", credentials);
       if (data != null) {
         setMessage("Login successful, sending you to your dashboard...");
         setLogIn(true);

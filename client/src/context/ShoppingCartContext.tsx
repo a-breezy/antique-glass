@@ -59,7 +59,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   useEffect(() => {
     try {
       axios
-        .get("http://localhost:5555/products")
+        .get("http://192.168.1.124:8080/products")
         .then((res) => setStoreItems(res.data.data));
     } catch (error: unknown) {
       console.log(error);

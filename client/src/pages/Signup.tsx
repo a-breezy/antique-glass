@@ -27,13 +27,13 @@ export default function Signup() {
     } else {
       try {
         const data = await axios.post(
-          "http://localhost:5555/vendor",
+          "http://192.168.1.124:8080/vendor",
           credentials
         );
         if (data != null) {
           setMessage("Sign up successful, sending you to your dashboard...");
           axios
-            .post("http://localhost:5555/login", {
+            .post("http://192.168.1.124:8080/login", {
               email: credentials.email,
               password: credentials.password,
             })
