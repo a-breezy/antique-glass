@@ -3,8 +3,6 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
-import { authToken } from "./utils/auth.js";
-
 import productRoutes from "./routes/productRoutes.js";
 import vendorRoutes from "./routes/vendorRoutes.js";
 import loginRoutes from "./routes/loginRoutes.js";
@@ -22,12 +20,13 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/login", loginRoutes);
-//! uncomment after testing to apply middleware to all routes
-// app.use("/vendor", authToken, vendorRoutes);
 app.use("/vendor", vendorRoutes);
 app.use("/products", productRoutes);
 
+
 app.use((req, res) => {
+  //! check what the request is for testing raspberry pi
+  console.log(req);
   res.status(404).send("<h1>404 Error!</h1>");
 });
 

@@ -28,7 +28,7 @@ export default function CreateProduct() {
     e.preventDefault();
 
     axios
-      .postForm("http://localhost:5555/products/", formData, {
+      .postForm("http://192.168.1.124:8080/products/", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then(() => {

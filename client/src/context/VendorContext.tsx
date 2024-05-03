@@ -56,7 +56,7 @@ export function VendorProvider({ children }: VendorProviderProps) {
     } else {
       if (data.id) setVendor(data.id);
       axios({
-        url: `http://localhost:5555/vendor/${data.id}`,
+        url: `http://192.168.1.124:8080/vendor/${data.id}`,
         method: "get",
         headers: {
           authorization: `Bearer ${data.token}`,

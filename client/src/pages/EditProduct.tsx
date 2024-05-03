@@ -28,7 +28,7 @@ export default function EditProduct() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5555/products/${productId}`)
+      .get(`http://192.168.1.124:8080/products/${productId}`)
       .then((res) => {
         const data = res.data;
         if (data) setFormData(data);
@@ -42,7 +42,7 @@ export default function EditProduct() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
-      .putForm(`http://localhost:5555/products/${productId}`, formData, {
+      .putForm(`http://192.168.1.124:8080/products/${productId}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then(() => {
